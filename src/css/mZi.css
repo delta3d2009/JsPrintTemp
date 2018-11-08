@@ -1,0 +1,191 @@
+.a_ope,
+.a_sty,
+.a_con {
+    display: flex;
+    padding: 10px 20px;
+    font: 400 12px Arial;
+}
+
+.a_sty {
+    flex-wrap: wrap;
+}
+
+.a_sty_lF,
+.a_sty_2F {
+    display: flex;
+    align-items: center;
+}
+
+
+/**操作区域*/
+
+.a_ope_btn {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 24px;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #28a3ef;
+    border: 1px solid #1299ec;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.a_ope_btn_change {
+    background-color: #ea4a36;
+    border: 1px solid #e8351f;
+    margin-left: 20px;
+}
+
+.arrow {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 13px;
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.arrow-up {
+    background-image: url(../img/print/arrow_up_16.png);
+}
+
+.arrow-down {
+    background-image: url(../img/print/arrow_down_16.png);
+}
+
+.arrow-left {
+    background-image: url(../img/print/arrow_left_16.png);
+}
+
+.arrow-right {
+    background-image: url(../img/print/arrow_right_16.png);
+}
+
+.dropDwon {
+    border: 1px solid #cccccc;
+    display: inline-block;
+    border-radius: 2px;
+    position: relative;
+}
+
+.dropDwon a {
+    color: #666;
+    min-width: 30px;
+    display: block;
+    padding: 2px 14px;
+    padding-left: 8px;
+    padding-right: 8px;
+    line-height: 18px;
+}
+
+.dropDwon .caret {
+    float: right;
+    margin-left: 4px;
+    line-height: 1.5;
+    font-family: "icon-pc";
+    font-style: normal;
+    vertical-align: -1px;
+}
+
+.sui-dropdown-menu {
+    position: absolute;
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.1);
+    background-clip: padding-box;
+    display: none;
+    left: -1px;
+    right: -1px;
+}
+
+.sui-dropdown-menu.active {
+    display: block;
+}
+
+.sui-dropdown-menu a.active,
+.sui-dropdown-menu a:hover {
+    background-color: #28a3ef;
+}
+
+
+/**内容部分**/
+
+.a_con_template {
+    height: 420px;
+    width: 320px;
+    position: relative;
+}
+
+.act_bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.act_bg img {
+    width: 100%;
+}
+
+.dymic {
+    position: absolute;
+    height: 24px;
+    line-height: 24px;
+    z-index: 10;
+    /* filter: opacity(0.3); */
+    cursor: move;
+    border: 1px solid #000;
+    width: fit-content;
+}
+
+.dymic_txt {
+    position: relative;
+    padding-right: 30px;
+}
+
+.filed {
+    color: #000;
+}
+
+.acf_icon {
+    position: absolute;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    top: 0;
+}
+
+.acf_icon img {
+    width: 100%;
+    cursor: pointer;
+}
+
+
+/**操作参数部分**/
+
+.a_con_params {
+    width: 600px;
+    position: relative;
+}
+
+.acp_databox {
+    width: 300px;
+    height: 350px;
+    border: 1px solid #666;
+    position: absolute;
+}
+
+.acp_itemwrap {
+    padding: 2px 5px;
+    cursor: pointer;
+}
+
+.acp_itemwrap:hover {
+    background-color: #E9EFF6;
+    border: 1px solid #CBDCF0;
+}
