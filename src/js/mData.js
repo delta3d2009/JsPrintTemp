@@ -17,9 +17,12 @@
             this.mdl.push(data);
         },
         delData: function(id) {
-            console.log(this.mdl);
+            var _this = this;
+            console.log(id);
 
-            delete this.mdl[id];
+            _.filter(_this.mdl, function(o) {
+                return o.id !== id;
+            })
         },
         updData: function(data) {
 
