@@ -7,8 +7,10 @@
 
     function mDrag(par) {
         this.drag = getEle(par.id);
-        this.data = par.data;
-        mData.addData(this.data);
+        if (par.data) {
+            this.data = par.data;
+            mData.addData(this.data);
+        }
         this.move();
     }
 
@@ -43,7 +45,15 @@
                 this.onmouseup  = null;             
                 if (typeof  _this.drag.releaseCapture != 'undefined') { 
                     _this.drag.releaseCapture();
-                }          
+                }
+                if (_this.data) {
+                    var obj = {
+                        x: mData.delStr(_this.drag.style.left),
+                        y: mData.delStr(_this.drag.style.top),
+                        id: _this.drag.id
+                    }
+                    mData.updData(obj);  
+                }    
             };      
         }
     }
