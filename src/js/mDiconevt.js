@@ -78,10 +78,25 @@
         } else {
             mData.mData_global.first_left = 0;
         }
-    })
+    });
+    // $("#mDrag_el_color").colorpicker({});
 
     document.getElementById('sortBtn').addEventListener('click', function(evt) {
 
+    })
+    $("#mDrag_mmm_font").on('click', function(evt) {
+        $(".mDrag_fontdropdownlist").toggle('active');
+    });
+
+    $(".DFL_item").on('click', function(evt) {
+        var ft = $(this).css('font-family');
+        if ($('.dymic').hasClass('active')) {
+            $('.dymic.active').css({ 'font-family': ft });
+            var id = $('.dymic.active').attr('id');
+            mData.updData({ id: id, fontFamily: ft });
+        } else {
+            $('.dymic').css({ 'font-family': ft })
+        }
     })
 
     function cal(el, direct, isAdd) {

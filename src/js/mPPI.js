@@ -25,12 +25,12 @@
     }
 
     function createid() {
-        return 'v_' + Math.random() * 10000000000000000;
+        return 'm_' + (new Date()).getTime();
     }
 
     addMPPI.prototype.init = function() {
         var _this = this;
-        const iid = createid();
+        const iid = 's' + createid();
         this.tag = getEle('div');
         this.tag.className = 'dymic';
         this.tag.id = createid();
@@ -47,17 +47,32 @@
         var cur_x = 0;
         var cur_y = 0;
         var curs = 0;
-        var eetop = calThisTop(mData.mdl);
-        if (mData.length > 1) {
+        var curcol = 1;
+        mData.updData({ id: _this.data.id, height: curh, width: curw })
+        if (mData.mdl.length > 1) {
+            curcol = getCol(_this, mData.mdl);
+        }
+        mData.updData({ id: _this.data.id, col: curcol })
+        if (curcol === 1) {
+            cur_x = mData.mData_global.first_left;
+        } else {
+            getMaxW(mData.mdl, (curcol - 1), 'width');
+            mData.sumPre();
+            cur_x = mData.mData_global.interval_x * (curcol - 1) + mData.sumPre() + mData.mData_global.first_left;
+        }
+        var eetop = calThisTop(mData.mdl, curcol);
+        if (mData.mdl.length > 1) {
             curs = mData.mdl[mData.mdl.length - 2].order + 1;
-            // cur_x = mData.mdl[mData.mdl.length - 2].width + mData.mData_global.interval_x * (mData.mdl.length - 1);
-            cur_y = eetop + mData.mData_global.interval_y * (mData.mdl.length - 1) + mData.mData_global.first_left;
+            cur_y = eetop.t + mData.mData_global.interval_y * eetop.c + mData.mData_global.first_left;
         } else {
             curs = 0;
-            cur_x = mData.mData_global.first_left;
             cur_y = mData.mData_global.first_top;
         }
-        mData.updData({ id: _this.data.id, height: curh, width: curw, x: cur_x, y: cur_y, order: curs })
+        var pos = _.filter(mData.mdl, function(o) {
+            return o.col === curcol;
+        });
+        var pos_sort = pos.length;
+        mData.updData({ id: _this.data.id, x: cur_x, y: cur_y, pos: { col: curcol, row: pos_sort }, order: curs });
         $(curid).css({ 'top': cur_y, 'left': cur_x });
         document.getElementById(iid).addEventListener('click', function(evt) {
             document.getElementById(_this.tag.id).remove();
@@ -74,13 +89,69 @@
         })
     }
 
-    function calThisTop(data) {
+    function calThisTop(data, col) {
         var curtop = 0;
+        data = _.filter(data, function(o) {
+            return o.col === col;
+        })
         for (let index = 0; index < data.length - 1; index++) {
             const item = data[index];
             curtop += item.height;
         }
-        return curtop;
+        return { t: curtop, c: data.length - 1 };
+    }
+
+    function getCol(_that, data) {
+        var contHeight = $(_that.container).height();
+        var sumEh = 0;
+        var cc = 1;
+        var lastObj = mData.mdl[mData.mdl.length - 1];
+        while (hasObj(data, cc)) {
+            cc++;
+        }
+        data = _.filter(mData.mdl, function(o) {
+            return o.col === cc - 1;
+        })
+
+        for (let index = 0; index < data.length; index++) {
+            const d = data[index];
+            if (index === 0) {
+                sumEh += d.height;
+            } else {
+                sumEh += d.height + mData.mData_global.interval_y;
+            }
+        }
+        if (contHeight < sumEh + mData.mData_global.first_top + lastObj.width + mData.mData_global.interval_y)
+            return cc;
+        return cc - 1;
+    }
+
+    function getMaxW(data, col, prop) {
+        data = _.filter(data, function(o) {
+            return o.col === col;
+        });
+        var temp;
+        var flag;
+        for (let i = 0; i < data.length - 1; i++) {
+            flag = false;
+            for (let j = data.length - 1; j > i; j--) {
+                if (data[j][prop] < data[j - 1][prop]) {
+                    temp = data[j];
+                    data[j] = data[j - 1];
+                    data[j - 1] = temp;
+                    flag = true;
+                }
+            }
+            if (!flag) break;
+        }
+        mData.addPre({
+            [col]: data[data.length - 1].width
+        });
+        return data;
+    }
+
+    function hasObj(data, col) {
+        return _.find(data, { col: col })
     }
     return addMPPI;
 })(document, jQuery));

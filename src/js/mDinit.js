@@ -10,19 +10,19 @@
         id: 1,
         title: '打印项目1',
         data: [
-            { filed: 'aaa', value: '分销商1' },
-            { filed: 'bbb', value: '分销商2' },
+            { filed: 'aaa', value: '分1' },
+            { filed: 'bbb', value: '分销2' },
             { filed: 'ccc', value: '分销商3' },
-            { filed: 'ddd', value: '分销商4' },
+            { filed: 'ddd', value: '分销商商4' },
         ]
     }, {
         id: 1,
         title: '打印项目2',
         data: [
-            { filed: 'eee', value: '项目1' },
-            { filed: 'fff', value: '项目2' },
-            { filed: 'ggg', value: '项目3' },
-            { filed: 'hhh', value: '项目4' },
+            { filed: 'eee', value: '项目商商商1' },
+            { filed: 'fff', value: '项目商商商商2' },
+            { filed: 'ggg', value: '项目商商商商商3' },
+            { filed: 'hhh', value: '项目商商商商商商4' },
         ]
     }]
 

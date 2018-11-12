@@ -39,9 +39,12 @@
          * _underline 元素下划线
          * _width 元素的宽度
          * _height 元素的高度
+         * _col 所属列所在位置
+         * _pos 行列坐标
+         * _preMax 上一列最大宽度
          * 
          */
-        mPar: function(_id, _filed, _val, _x, _y, _order, _differX, _differY, _fontSize, _fontColor, _fontFamily, _align, _bold, _italic, _underline, _width, _height) {
+        mPar: function(_id, _filed, _val, _x, _y, _order, _differX, _differY, _fontSize, _fontColor, _fontFamily, _align, _bold, _italic, _underline, _width, _height, _col, _pos, _preMax) {
             this.id = _id;
             this.filed = _filed;
             this.val = _val;
@@ -59,6 +62,9 @@
             this.bold = _bold;
             this.italic = _italic;
             this.underline = _underline;
+            this.col = _col;
+            this.pos = _pos;
+            this.preMax = _preMax;
         },
         /**
          * 
@@ -90,6 +96,25 @@
          * 数据集合
          */
         mdl: [],
+        preMax: {},
+        addPre: function(data) {
+            var _this = this;
+            Object.assign(_this.preMax, data);
+        },
+        delPre: function(key) {
+            if (!this._preMax.hasOwnProperty(key)) {
+                return;
+            }
+            delete this._preMax[key]
+        },
+        sumPre: function() {
+            var _this = this;
+            var sum = 0;
+            _.forEach(_this.preMax, function(v, k) {
+                sum += v;
+            })
+            return sum;
+        },
         addData: function(data) {
             this.mdl.push(data);
         },
@@ -113,7 +138,7 @@
                 return o.id !== data.id;
             })
             _this.mdl.push(obj);
-            console.log(_this.mdl);
+            // console.log(_this.mdl);
 
         },
         delStr: function(str) {

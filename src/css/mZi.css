@@ -11,13 +11,15 @@
 }
 
 .a_sty_lF,
-.a_sty_2F {
+.a_sty_2F,
+.a_sty_3F {
     display: flex;
     align-items: center;
     width: 100%;
 }
 
-.a_sty_2F {
+.a_sty_2F,
+.a_sty_3F {
     margin-top: 20px;
 }
 
@@ -55,6 +57,96 @@
 .mDrag_font_droplist li:hover,
 .mDrag_font_droplist li.active {
     background-color: #28a3ef;
+}
+
+
+/**元素样式区域*/
+
+.mDrag_elwrap {
+    border-bottom: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
+    padding: 4px 10px;
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+}
+
+.mDrag_el_item {
+    height: 20px !important;
+    width: 20px;
+    line-height: 20px;
+    display: block;
+    text-align: center;
+    background: url(../img/print/icons.png) no-repeat;
+    cursor: pointer;
+    margin: 3px 3px;
+}
+
+.mDrag_el_text {
+    width: 30px;
+    background: none;
+    font-weight: bold;
+    position: relative;
+}
+
+.mDrag_el_split {
+    width: 2px;
+    background-position: -180px 0;
+}
+
+.mDrag_el_color {
+    width: 40px;
+    background: none;
+    display: flex;
+    align-items: center;
+}
+
+.mDrag_el_icon_f {
+    position: relative;
+    background-position: -720px 0;
+}
+
+.mDrag_el_arr_f {
+    background-position: -741px 0;
+    width: 9px;
+}
+
+.mDrag_el-colorlump {
+    position: absolute;
+    overflow: hidden;
+    bottom: 1px;
+    left: 1px;
+    width: 18px;
+    height: 3px;
+    background-color: #404040;
+}
+
+.mDrag_el_blod {
+    background-position: 0 0;
+}
+
+.mDrag_el_italic {
+    background-position: -60px 0;
+}
+
+.mDrag_el_underline {
+    background-position: -140px 0;
+}
+
+.mDrag_el_justifyleft {
+    background-position: -460px 0;
+}
+
+.mDrag_el_justifycenter {
+    background-position: -420px 0;
+}
+
+.mDrag_el_justifyright {
+    background-position: -480px 0;
+}
+
+.mDrag_el_justifybetween {
+    background-position: -440px 0;
 }
 
 
@@ -163,6 +255,43 @@
 .acf_icon img {
     width: 100%;
     cursor: pointer;
+}
+
+
+/**字体选择器*/
+
+.mDrag_fontdropdownlist {
+    position: absolute;
+    top: 25px;
+    z-index: 100;
+    display: none;
+}
+
+.mDrag_fontdropdownlist.active {
+    display: block;
+}
+
+.DFL_wrap {
+    border: 1px solid gray;
+    background-color: white;
+    padding: 5px;
+}
+
+.DFL_item {
+    min-width: 120px;
+    font-size: 12px;
+    height: 22px;
+    line-height: 22px;
+    padding-left: 5px;
+    cursor: pointer;
+    border: 1px solid #fff;
+    text-align: left;
+    font-weight: normal;
+}
+
+.DFL_item:hover {
+    background: #fff5d4;
+    border: 1px solid #dcac6c;
 }
 
 

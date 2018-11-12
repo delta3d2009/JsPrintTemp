@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="./css/jquery-ui.min.css">
+    <link rel="stylesheet" href="./css/evol.colorpicker.min.css">
     <link rel="stylesheet" href="./css/public.css">
     <link rel="stylesheet" href="./css/mZi.css">
 </head>
@@ -64,7 +66,43 @@
             <input type="text" name="" id="mDrag_ft">
             <label for="">第一项的左边距：</label>
             <input type="text" name="" id="mDrag_fl">
-            <input id="sortBtn" type="button" value="排序" style="padding: 2px 5px;margin-left: 30px;">
+            <input id="sortBtn" type="button" value="重新排序" style="padding: 2px 5px;margin-left: 30px;">
+        </div>
+        <div class="a_sty_3F">
+            <div class="mDrag_elwrap">
+                <span id="mDrag_mmm_font" class="mDrag_el_item mDrag_el_text" title="字体样式"><span class="mDrag_mmm_font_span">字体</span>
+                <div class="mDrag_fontdropdownlist">
+                    <div class="DFL_wrap">
+                        <ul class="DFL_boe">
+                            <li class="DFL_item" style="font-family:宋体">
+                                宋体
+                            </li>
+                            <li class="DFL_item" style="font-family:黑体">
+                                黑体
+                            </li>
+                            <li class="DFL_item" style="font-family:楷体">
+                                楷体
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                </span>
+                <span class="mDrag_el_item mDrag_el_text" title="字体大小">大小</span>
+                <span class="mDrag_el_item mDrag_el_split">&nbsp;</span>
+                <span id="mDrag_el_color" class="mDrag_el_item mDrag_el_color" title="字体颜色">&nbsp;
+                    <span class="mDrag_el_item mDrag_el_icon_f">&nbsp;<span class="mDrag_el-colorlump"></span></span>
+                <span class="mDrag_el_item mDrag_el_arr_f"></span>
+                </span>
+                <span class="mDrag_el_item mDrag_el_blod" title="加粗">&nbsp;</span>
+                <span class="mDrag_el_item mDrag_el_italic" title="斜体">&nbsp;</span>
+                <span class="mDrag_el_item mDrag_el_underline" title="下划线">&nbsp;</span>
+                <span class="mDrag_el_item mDrag_el_split">&nbsp;</span>
+                <span class="mDrag_el_item mDrag_el_justifyleft" title="向左对齐">&nbsp;</span>
+                <span class="mDrag_el_item mDrag_el_justifycenter" title="剧中对齐">&nbsp;</span>
+                <span class="mDrag_el_item mDrag_el_justifyright" title="向右对齐">&nbsp;</span>
+                <span class="mDrag_el_item mDrag_el_justifybetween" title="两端对齐">&nbsp;</span>
+                <span class="mDrag_el_item mDrag_el_split">&nbsp;</span>
+            </div>
         </div>
     </div>
     <!-- <div id="mDrag_dymic_parm" class="a_con">
@@ -132,7 +170,9 @@
     </div> -->
 </body>
 <script src="./js/lib/jQuery-3.3.1.min.js"></script>
+<script src="./js/lib/jquery-ui.min.js"></script>
 <script src="./js/lib/lodash.js"></script>
+<script src="./js/lib/evol.colorpicker.min.js"></script>
 <script src="./js/mDinit.js"></script>
 <script src="./js/mData.js"></script>
 <script src="./js/mDrag.js"></script>
