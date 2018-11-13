@@ -1,3 +1,10 @@
+.mDrag_outter_wrap {
+    background: #fff;
+    margin: 20px 30px;
+    padding: 35px 5px;
+    color: #ADADAD;
+}
+
 .a_ope,
 .a_sty,
 .a_con {
@@ -8,6 +15,10 @@
 
 .a_sty {
     flex-wrap: wrap;
+}
+
+.a_con {
+    padding: 30px;
 }
 
 .a_sty_lF,
@@ -23,12 +34,19 @@
     margin-top: 20px;
 }
 
+.a_sty_3F {
+    width: auto;
+    margin: 20px 30px;
+    background: #fff;
+}
+
 .mDrag_font,
 .mDrag_font_text,
 .mDrag_font_icon {
     position: relative;
     display: inline-block;
     width: 120px;
+    white-space: nowrap;
 }
 
 .mDrag_font_text {
@@ -63,12 +81,10 @@
 /**元素样式区域*/
 
 .mDrag_elwrap {
-    border-bottom: 1px solid #e5e5e5;
-    border-top: 1px solid #e5e5e5;
-    padding: 4px 10px;
-    margin-top: 10px;
+    padding: 4px 20px;
     width: 100%;
     display: flex;
+    margin: 10px 0;
 }
 
 .mDrag_el_item {
@@ -154,47 +170,71 @@
 /**操作区域*/
 
 .a_ope_btn {
-    height: 24px;
-    line-height: 24px;
+    line-height: 30px;
     padding: 0 24px;
     cursor: pointer;
     color: #ffffff;
     background-color: #28a3ef;
     border: 1px solid #1299ec;
     box-sizing: border-box;
-    border-radius: 2px;
+    width: 152px;
+    height: 30px;
+    background: rgba(0, 168, 255, 1);
+    border-radius: 20px;
+    font-size: 14px;
+    text-align: center;
 }
 
 .a_ope_btn_change {
-    background-color: #ea4a36;
-    border: 1px solid #e8351f;
+    background: rgba(255, 198, 44, 1);
+    border: 1px solid rgb(196, 152, 31);
     margin-left: 20px;
+    position: relative;
+}
+
+#backgroundFile {
+    position: absolute;
+    width: 89px;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    opacity: 0;
+    width: 100%;
+    height: 30px;
+    border-radius: 20px;
 }
 
 .arrow {
     display: inline-block;
     cursor: pointer;
     font-size: 13px;
-    height: 20px;
+    height: 26px;
     width: 20px;
     background-repeat: no-repeat;
     background-position: center;
+    border: 1px solid rgba(209, 209, 209, 1);
 }
 
 .arrow-up {
     background-image: url(../img/print/arrow_up_16.png);
+    border-right: none;
 }
 
 .arrow-down {
     background-image: url(../img/print/arrow_down_16.png);
+    border-left: none;
 }
 
 .arrow-left {
     background-image: url(../img/print/arrow_left_16.png);
+    border-right: none;
 }
 
 .arrow-right {
     background-image: url(../img/print/arrow_right_16.png);
+    border-left: none;
 }
 
 
@@ -313,12 +353,15 @@
 }
 
 .a_con_params .header {
-    background-color: #888888;
     height: 28px;
     line-height: 28px;
     font-size: 16px;
     padding: 0 10px;
     color: #FFFFFF;
+    background: rgba(4, 149, 239, 1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
 }
 
 .sui-icon {
@@ -358,11 +401,16 @@
     line-height: 20px;
     cursor: pointer;
     padding: 2px 10px;
-    background: #E3E6E8;
+    color: #fff;
+    background: rgba(146, 213, 255, 1);
 }
 
 .print-field-container li.separator-title i {
     float: right;
+}
+
+ul.acp_datawrap {
+    overflow: hidden;
 }
 
 .acp_databox {
@@ -371,8 +419,8 @@
     position: absolute;
     box-sizing: border-box;
     background: #F5F5F5;
-    border: 2px solid #999999;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .acp_itemwrap {

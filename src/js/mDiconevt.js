@@ -1,4 +1,18 @@
 (function($) {
+    document.addEventListener('click', function(evt) {
+        if (evt.target.id !== 'mDrag_f_s') {
+            $("#mDrag_f_s").siblings('.mDrag_font_droplist').hide('slow');
+        }
+        if (evt.target.id !== 'mDrag_f_t') {
+            $("#mDrag_f_t").siblings('.mDrag_font_droplist').hide('slow');
+        }
+        if (evt.target.id !== 'mDrag_do_gone_bone') {
+            $("#mDrag_do_gone_bone").siblings('.mDrag_fontdropdownlist').hide('slow');
+        }
+        if (evt.target.id !== 'mDrag_do_gone_boom') {
+            $("#mDrag_do_gone_boom").siblings('.mDrag_fontdropdownlist').hide('slow');
+        }
+    })
     var spans = document.getElementsByClassName('mDrag_arrow');
     for (let index = 0; index < spans.length; index++) {
         const e = spans[index];
@@ -15,6 +29,20 @@
         })
     }
 
+    function def() {
+        $('#mDrag_tmpn').val(mData.tmp.name);
+        $('#mDrag_tmpw').val(mData.tmp.width);
+        $('#mDrag_tmph').val(mData.tmp.height);
+        $('#mDrag_hdx').val(mData.tmp.dx);
+        $('#mDrag_wdy').val(mData.tmp.dy);
+        $('#mDrag_f_s').text(mData.tmp.fontSize);
+        $('#mDrag_f_t').text(mData.tmp.fontFamily);
+        $('#mDrag_spert_x').val(mData.mData_global.interval_x);
+        $('#mDrag_spert_y').val(mData.mData_global.interval_y);
+        $('#mDrag_ft').val(mData.mData_global.first_top);
+        $('#mDrag_fl').val(mData.mData_global.first_left);
+    }
+    def();
     document.getElementById('mDrag_tmpn').addEventListener('keyup', function(evt) {
         if (this.value) {
             mData.tmp.name = this.value;
@@ -88,9 +116,75 @@
         }
     });
 
-    document.getElementById('sortBtn').addEventListener('click', function(evt) {
-
+    $('.show-print-items').on('click', function(evt) {
+        if ($(this).children('.sui-icon').hasClass('icon-double-angle-up')) {
+            $(this).children('.sui-icon').removeClass('icon-double-angle-up');
+            $(this).children('.sui-icon').addClass('icon-double-angle-down');
+            $(this).parent().parent().animate({
+                height: "28px"
+            }, 100);
+        } else {
+            $(this).children('.sui-icon').removeClass('icon-double-angle-down');
+            $(this).children('.sui-icon').addClass('icon-double-angle-up');
+            $(this).parent().parent().animate({
+                height: "350px"
+            }, 200);
+        }
     })
+
+    $(".separator-title").on('click', function(params) {
+        if ($(this).children('.sui-icon').hasClass('icon-double-angle-up')) {
+            $(this).children('.sui-icon').removeClass('icon-double-angle-up');
+            $(this).children('.sui-icon').addClass('icon-double-angle-down');
+            $(this).parent().animate({
+                height: "25px"
+            }, 200);
+        } else {
+            var a = $(this).siblings('.acp_itemwrap');
+            var h = (a.length + 1) * 24;
+            $(this).children('.sui-icon').removeClass('icon-double-angle-down');
+            $(this).children('.sui-icon').addClass('icon-double-angle-up');
+            $(this).parent().animate({
+                height: h + "px"
+            }, 200);
+        }
+    })
+
+    $('.saveBtn').on('click', function(evt) {
+        console.log('提交数据包:');
+        mData.tmp.eles = mData.mdl;
+        console.log(mData.tmp);
+    })
+
+    $('.sortBtn').on('click', function(evt) {
+        mData.mdl = _.sortBy(mData.mdl, ['order']);
+        let curaddTop = 0;
+        let curaddLeft = 0;
+        _.forEach(mData.mdl, function(v, k) {
+            if (k == 0) {
+                curaddTop = mData.mData_global.first_top + v.height;
+            } else {
+                curaddTop += mData.mData_global.interval_y + v.height;
+            }
+            if (v.col == 1) {
+                curaddLeft = mData.mData_global.first_left;
+            }
+            $("#" + v.id).css({ top: curaddTop, left: curaddLeft })
+        });
+    })
+
+
+    $("#backgroundFile").change(function(evt) {
+        var file = this.files[0];
+        var reader = new FileReader();
+        var imgFile;
+        reader.onload = function(e) {
+            imgFile = e.target.result;
+            $("#tmp_bg_action").attr('src', imgFile);
+        };
+        reader.readAsDataURL(file);
+    });
+
     $("#mDrag_mmm_font,#mDrag_mmm_size").on('click', function(evt) {
         $(this).children(".mDrag_fontdropdownlist").toggle('active');
     });
