@@ -138,7 +138,13 @@
                 return o.id !== data.id;
             })
             _this.mdl.push(obj);
-            // console.log(_this.mdl);
+        },
+        updDataAll: function(data) {
+            var _this = this;
+            _.forEach(_this.mdl, function(o) {
+                Object.assign(o, data);
+            })
+            console.log(_this.mdl);
 
         },
         delStr: function(str) {

@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/jquery-ui.min.css">
-    <link rel="stylesheet" href="./css/evol.colorpicker.min.css">
+    <link rel="stylesheet" href="./css/jquery.bigcolorpicker.css">
     <link rel="stylesheet" href="./css/public.css">
     <link rel="stylesheet" href="./css/mZi.css">
 </head>
@@ -87,7 +86,32 @@
                     </div>
                 </div>
                 </span>
-                <span class="mDrag_el_item mDrag_el_text" title="字体大小">大小</span>
+                <span id="mDrag_mmm_size" class="mDrag_el_item mDrag_el_text" title="字体大小"><span>大小</span>
+                <div class="mDrag_fontdropdownlist">
+                    <div class="DFL_wrap">
+                        <ul class="DFL_boe">
+                            <li class="DFL_item_size" style="font-size:12pxheight: auto;">
+                                12
+                            </li>
+                            <li class="DFL_item_size" style="font-size:14px;height: auto;">
+                                14
+                            </li>
+                            <li class="DFL_item_size" style="font-size:16px;height: auto;">
+                                16
+                            </li>
+                            <li class="DFL_item_size" style="font-size:20px;height: auto;">
+                                20
+                            </li>
+                            <li class="DFL_item_size" style="font-size:26px;height: auto;">
+                                26
+                            </li>
+                            <li class="DFL_item_size" style="font-size:32px;height: auto;">
+                                32
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                </span>
                 <span class="mDrag_el_item mDrag_el_split">&nbsp;</span>
                 <span id="mDrag_el_color" class="mDrag_el_item mDrag_el_color" title="字体颜色">&nbsp;
                     <span class="mDrag_el_item mDrag_el_icon_f">&nbsp;<span class="mDrag_el-colorlump"></span></span>
@@ -97,11 +121,11 @@
                 <span class="mDrag_el_item mDrag_el_italic" title="斜体">&nbsp;</span>
                 <span class="mDrag_el_item mDrag_el_underline" title="下划线">&nbsp;</span>
                 <span class="mDrag_el_item mDrag_el_split">&nbsp;</span>
-                <span class="mDrag_el_item mDrag_el_justifyleft" title="向左对齐">&nbsp;</span>
-                <span class="mDrag_el_item mDrag_el_justifycenter" title="剧中对齐">&nbsp;</span>
-                <span class="mDrag_el_item mDrag_el_justifyright" title="向右对齐">&nbsp;</span>
-                <span class="mDrag_el_item mDrag_el_justifybetween" title="两端对齐">&nbsp;</span>
-                <span class="mDrag_el_item mDrag_el_split">&nbsp;</span>
+                <span class="mDrag_el_item mDrag_el_justify mDrag_el_justifyleft" data-v="left" title="向左对齐">&nbsp;</span>
+                <span class="mDrag_el_item mDrag_el_justify mDrag_el_justifycenter" data-v="center" title="剧中对齐">&nbsp;</span>
+                <span class="mDrag_el_item mDrag_el_justify mDrag_el_justifyright" data-v="right" title="向右对齐">&nbsp;</span>
+                <span class="mDrag_el_item mDrag_el_justify mDrag_el_justifybetween" data-v="center" title="两端对齐">&nbsp;</span>
+                <span class="mDrag_el_item mDrag_el_justify mDrag_el_split">&nbsp;</span>
             </div>
         </div>
     </div>
@@ -170,9 +194,8 @@
     </div> -->
 </body>
 <script src="./js/lib/jQuery-3.3.1.min.js"></script>
-<script src="./js/lib/jquery-ui.min.js"></script>
 <script src="./js/lib/lodash.js"></script>
-<script src="./js/lib/evol.colorpicker.min.js"></script>
+<script src="./js/lib/jquery.bigcolorpicker.min.js"></script>
 <script src="./js/mDinit.js"></script>
 <script src="./js/mData.js"></script>
 <script src="./js/mDrag.js"></script>

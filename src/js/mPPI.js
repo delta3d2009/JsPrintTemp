@@ -36,7 +36,7 @@
         this.tag.id = createid();
         this.childTag = getEle('div');
         this.childTag.className = 'dymic_txt';
-        this.childTag.innerHTML = '<span class="filed">' + this.val + '</span><span class="acf_icon"><img id="' + iid + '" src="../img/print/remove.png" alt=""></span>';
+        this.childTag.innerHTML = '<span class="filed" id="va' + iid + '">' + this.val + '</span><span class="acf_icon"><img id="' + iid + '" src="../img/print/remove.png" alt=""></span>';
         this.tag.append(this.childTag);
         this.container.append(this.tag);
         this.data.id = this.tag.id;

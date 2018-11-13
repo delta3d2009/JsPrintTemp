@@ -79,13 +79,20 @@
             mData.mData_global.first_left = 0;
         }
     });
-    // $("#mDrag_el_color").colorpicker({});
+
+    $(".mDrag_el_color").bigColorpicker(function(el, color) {
+        if ($('.dymic').hasClass('active')) {
+            var id = $('.dymic.active').attr('id');
+            $('#vas' + id).css({ 'color': color });
+            mData.updData({ id: id, fontColor: color });
+        }
+    });
 
     document.getElementById('sortBtn').addEventListener('click', function(evt) {
 
     })
-    $("#mDrag_mmm_font").on('click', function(evt) {
-        $(".mDrag_fontdropdownlist").toggle('active');
+    $("#mDrag_mmm_font,#mDrag_mmm_size").on('click', function(evt) {
+        $(this).children(".mDrag_fontdropdownlist").toggle('active');
     });
 
     $(".DFL_item").on('click', function(evt) {
@@ -94,8 +101,64 @@
             $('.dymic.active').css({ 'font-family': ft });
             var id = $('.dymic.active').attr('id');
             mData.updData({ id: id, fontFamily: ft });
-        } else {
-            $('.dymic').css({ 'font-family': ft })
+        }
+    })
+
+    $(".DFL_item_size").on('click', function(evt) {
+        var ft = $(this).css('font-size');
+        if ($('.dymic').hasClass('active')) {
+            $('.dymic.active').css({ 'font-size': ft });
+            var id = $('.dymic.active').attr('id');
+            mData.updData({ id: id, fontSize: ft });
+        }
+    })
+
+    $('.mDrag_el_blod').on('click', function(evt) {
+        if ($('.dymic').hasClass('active')) {
+            if ($('.dymic.active').css('font-weight') === '400') {
+                $('.dymic.active').css({ 'font-weight': 'bold' });
+                var id = $('.dymic.active').attr('id');
+                mData.updData({ id: id, bold: 'bold' });
+            } else {
+                $('.dymic.active').css({ 'font-weight': 'normal' });
+                var id = $('.dymic.active').attr('id');
+                mData.updData({ id: id, bold: 'normal' });
+            }
+        }
+    })
+
+    $('.mDrag_el_italic').on('click', function(evt) {
+        if ($('.dymic').hasClass('active')) {
+            if ($('.dymic.active').css('font-style') === 'normal') {
+                $('.dymic.active').css({ 'font-style': 'italic' });
+                var id = $('.dymic.active').attr('id');
+                mData.updData({ id: id, italic: 'italic' });
+            } else {
+                $('.dymic.active').css({ 'font-style': 'normal' });
+                var id = $('.dymic.active').attr('id');
+                mData.updData({ id: id, italic: 'normal' });
+            }
+        }
+    })
+
+    $('.mDrag_el_underline').on('click', function(evt) {
+        if ($('.dymic').hasClass('active')) {
+            if ($('.dymic.active').css('text-decoration') === 'none solid rgb(0, 0, 0)') {
+                $('.dymic.active').css({ 'text-decoration': 'underline' });
+                var id = $('.dymic.active').attr('id');
+                mData.updData({ id: id, underline: 'underline' });
+            } else {
+                $('.dymic.active').css({ 'text-decoration': 'none solid rgb(0, 0, 0)' });
+                var id = $('.dymic.active').attr('id');
+                mData.updData({ id: id, underline: 'none solid rgb(0, 0, 0)' });
+            }
+        }
+    })
+
+    $('.mDrag_el_justify').on('click', function(evt) {
+        var _this = this;
+        if ($('.dymic').hasClass('active')) {
+            $('.dymic.active').css({ 'text-align': $(_this).attr('data-v') });
         }
     })
 

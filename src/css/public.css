@@ -103,3 +103,7 @@ input[type="color"],
     font-weight: normal;
     font-style: normal;
 }
+
+#bigHexColorText {
+    width: fit-content;
+}
