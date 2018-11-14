@@ -24,4 +24,64 @@
 <script src="./js/mDiconevt.js"></script>
 <script src="./js/mZi.js"></script>
 
+<script src="http://172.16.254.70:8000/CLodopfuncs.js"></script>
+<script src="http://172.16.254.70:18000/CLodopfuncs.js"></script>
+
+<script>
+    //模拟打印
+    $('.saveBtn').on('click', function(evt) {
+        var LODOP = getCLodop();
+        if (LODOP.webskt && LODOP.webskt.readyState == 1) {
+            console.log('提交数据包:');
+            mData.tmp.eles = mData.mdl;
+            console.log(mData.tmp);
+            //初始化打印任务
+            LODOP.PRINT_INIT("模拟打印门票:");
+            //画一张门票
+            LODOP.ADD_PRINT_RECT(mData.tmp.dy, mData.tmp.dx, mData.tmp.height, mData.tmp.width);
+            //全局风格/基本风格
+            LODOP.SET_PRINT_STYLE("FontName", mData.mData_global.fontFamily);
+            LODOP.SET_PRINT_STYLE("FontSize", mData.mData_global.fontSize);
+            //背景图
+            var sortID = 1;
+            var data = $('#tmp_bg_action').attr('src');
+            if (data) {
+                LODOP.ADD_PRINT_IMAGE(mData.bgi.t, mData.bgi.l, mData.bgi.w, mData.bgi.h, data);
+                LODOP.SET_PRINT_STYLE('Stretch', 1);
+                sortID++;
+            }
+            //模板元素处理
+            for (let index = 0; index < mData.tmp.eles.length; index++) {
+                sortID++;
+                const item = mData.tmp.eles[index];
+                LODOP.ADD_PRINT_TEXT(item.y, item.x, item.width, item.height, item.val);
+                if (item.fontFamily) {
+                    LODOP.SET_PRINT_STYLEA(sortID, "FontName", item.fontFamily);
+                }
+                if (item.fontSize) {
+                    LODOP.SET_PRINT_STYLEA(sortID, "FontSize", item.fontSize);
+                }
+                if (item.fontColor) {
+                    LODOP.SET_PRINT_STYLEA(sortID, "FontColor", item.fontColor);
+                }
+                if (item.bold) {
+                    LODOP.SET_PRINT_STYLEA(sortID, "Bold", item.bold);
+                }
+                if (item.underline) {
+                    LODOP.SET_PRINT_STYLEA(sortID, "Underline", item.underline);
+                }
+                if (item.align) {
+                    LODOP.SET_PRINT_STYLEA(sortID, "Alignment", item.align);
+                }
+                if (item.italic) {
+                    LODOP.SET_PRINT_STYLEA(sortID, "Italic", item.italic);
+                }
+            }
+            LODOP.PREVIEW();
+        } else {
+            console.log('not ready');
+        }
+    });
+</script>
+
 </html>

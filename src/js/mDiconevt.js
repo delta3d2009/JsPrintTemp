@@ -84,11 +84,40 @@
             mData.mData_global.interval_x = 0;
         }
     })
-    document.getElementById('mDrag_spert_y').addEventListener('keyup', function(evt) {
+    document.getElementById('bg_mDrag_spert_x').addEventListener('keyup', function(evt) {
         if (this.value) {
-            mData.mData_global.interval_y = parseInt(this.value);
+            $(".act_bg").css({ 'left': parseInt(this.value) })
+            mData.bgi.l = parseInt(this.value);
         } else {
-            mData.mData_global.interval_y = 0;
+            $(".act_bg").css({ 'left': 0 })
+            mData.bgi.l = 0;
+        }
+    })
+    document.getElementById('bg_mDrag_spert_w').addEventListener('keyup', function(evt) {
+        if (this.value) {
+            $(".act_bg").css({ 'width': parseInt(this.value) })
+            mData.bgi.w = parseInt(this.value);
+        } else {
+            $(".act_bg").css({ 'width': mData.tmp.width })
+            mData.bgi.w = mData.tmp.width;
+        }
+    })
+    document.getElementById('bg_mDrag_spert_h').addEventListener('keyup', function(evt) {
+        if (this.value) {
+            $(".act_bg").css({ 'height': parseInt(this.value) })
+            mData.bgi.h = parseInt(this.value);
+        } else {
+            $(".act_bg").css({ 'height': mData.tmp.height })
+            mData.bgi.h = mData.tmp.height;
+        }
+    })
+    document.getElementById('bg_mDrag_spert_y').addEventListener('keyup', function(evt) {
+        if (this.value) {
+            $(".act_bg").css({ 'top': parseInt(this.value) })
+            mData.bgi.t = parseInt(this.value);
+        } else {
+            $(".act_bg").css({ 'top': 0 })
+            mData.bgi.t = 0;
         }
     })
 
@@ -150,11 +179,11 @@
         }
     })
 
-    $('.saveBtn').on('click', function(evt) {
-        console.log('提交数据包:');
-        mData.tmp.eles = mData.mdl;
-        console.log(mData.tmp);
-    })
+    // $('.saveBtn').on('click', function(evt) {
+    //     console.log('提交数据包:');
+    //     mData.tmp.eles = mData.mdl;
+    //     console.log(mData.tmp);
+    // })
 
     $('.sortBtn').on('click', function(evt) {
         mData.mdl = _.sortBy(mData.mdl, ['order']);
@@ -162,13 +191,14 @@
         let curaddLeft = 0;
         _.forEach(mData.mdl, function(v, k) {
             if (k == 0) {
-                curaddTop = mData.mData_global.first_top + v.height;
+                curaddTop = mData.mData_global.first_top;
             } else {
                 curaddTop += mData.mData_global.interval_y + v.height;
             }
             if (v.col == 1) {
                 curaddLeft = mData.mData_global.first_left;
             }
+            mData.updData({ id: v.id, x: curaddLeft, y: curaddTop });
             $("#" + v.id).css({ top: curaddTop, left: curaddLeft })
         });
     })
@@ -203,7 +233,7 @@
         if ($('.dymic').hasClass('active')) {
             $('.dymic.active').css({ 'font-size': ft });
             var id = $('.dymic.active').attr('id');
-            mData.updData({ id: id, fontSize: ft });
+            mData.updData({ id: id, fontSize: parseInt(ft.replace(/px/g, '')) });
         }
     })
 
@@ -212,11 +242,11 @@
             if ($('.dymic.active').css('font-weight') === '400') {
                 $('.dymic.active').css({ 'font-weight': 'bold' });
                 var id = $('.dymic.active').attr('id');
-                mData.updData({ id: id, bold: 'bold' });
+                mData.updData({ id: id, bold: 1 });
             } else {
                 $('.dymic.active').css({ 'font-weight': 'normal' });
                 var id = $('.dymic.active').attr('id');
-                mData.updData({ id: id, bold: 'normal' });
+                mData.updData({ id: id, bold: 0 });
             }
         }
     })
@@ -226,11 +256,11 @@
             if ($('.dymic.active').css('font-style') === 'normal') {
                 $('.dymic.active').css({ 'font-style': 'italic' });
                 var id = $('.dymic.active').attr('id');
-                mData.updData({ id: id, italic: 'italic' });
+                mData.updData({ id: id, italic: 1 });
             } else {
                 $('.dymic.active').css({ 'font-style': 'normal' });
                 var id = $('.dymic.active').attr('id');
-                mData.updData({ id: id, italic: 'normal' });
+                mData.updData({ id: id, italic: 0 });
             }
         }
     })
@@ -240,11 +270,11 @@
             if ($('.dymic.active').css('text-decoration') === 'none solid rgb(0, 0, 0)') {
                 $('.dymic.active').css({ 'text-decoration': 'underline' });
                 var id = $('.dymic.active').attr('id');
-                mData.updData({ id: id, underline: 'underline' });
+                mData.updData({ id: id, underline: 1 });
             } else {
                 $('.dymic.active').css({ 'text-decoration': 'none solid rgb(0, 0, 0)' });
                 var id = $('.dymic.active').attr('id');
-                mData.updData({ id: id, underline: 'none solid rgb(0, 0, 0)' });
+                mData.updData({ id: id, underline: 0 });
             }
         }
     })
@@ -252,7 +282,16 @@
     $('.mDrag_el_justify').on('click', function(evt) {
         var _this = this;
         if ($('.dymic').hasClass('active')) {
-            $('.dymic.active').css({ 'text-align': $(_this).attr('data-v') });
+            var strsty = $(_this).attr('data-v');
+            var id = $('.dymic.active').attr('id');
+            $('.dymic.active').css({ 'text-align': strsty });
+            if (strsty == 'center') {
+                mData.updData({ id: id, align: 2 });
+            } else if (strsty == 'right') {
+                mData.updData({ id: id, align: 3 });
+            } else {
+                mData.updData({ id: id, align: 1 });
+            }
         }
     })
 

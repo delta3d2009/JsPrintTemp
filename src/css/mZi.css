@@ -240,11 +240,18 @@
 
 /**内容部分**/
 
+div#mDrag_dymic_parm {
+    background: rgb(221, 220, 220);
+    margin: 0 30px;
+}
+
 .a_con_template {
     height: 420px;
     width: 320px;
     min-width: 100px;
     position: relative;
+    background: #FFFFFF;
+    overflow: hidden;
 }
 
 .act_bg {
@@ -263,8 +270,8 @@
 
 .dymic {
     position: absolute;
-    height: 24px;
-    line-height: 24px;
+    height: fit-content;
+    padding: 5px 5px;
     z-index: 10;
     cursor: move;
     border: 1px solid #000;
@@ -290,7 +297,8 @@
     right: 0;
     width: 24px;
     height: 24px;
-    top: 0;
+    top: 50%;
+    margin-top: -12px;
 }
 
 .acf_icon img {

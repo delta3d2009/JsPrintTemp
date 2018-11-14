@@ -57,6 +57,15 @@
                 <div class="a_ope_btn a_ope_btn_save sortBtn" style="margin-left:30px;">重新排序</div>
             </div>
 
+            <div class="a_sty_2F">
+                <label for="" style="margin-left:0;">横向边距：</label>
+                <input type="text" name="" id="bg_mDrag_spert_x">
+                <label for="">纵向边距：</label>
+                <input type="text" name="" id="bg_mDrag_spert_y">
+                <label for="">宽（背景）：</label>
+                <input type="text" name="" id="bg_mDrag_spert_w"><label for="">高（背景）：</label><input type="text" name="" id="bg_mDrag_spert_h">
+            </div>
+
         </div>
     </div>
     <div class="a_sty_3F">

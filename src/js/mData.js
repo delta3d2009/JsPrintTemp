@@ -17,6 +17,8 @@
             first_left: 10, //默认第一项的做边距
             interval_x: 10, //横向间距
             interval_y: 10, //纵向间距
+            ele_max_width: 300, //默认300像素
+            ele_min_width: 80, //默认200像素
         },
         /**
          * 
@@ -90,7 +92,16 @@
             fontSize: 12,
             fontColor: '#000',
             fontFamily: 'tahoma, "Microsoft Yahei", "SimSun", sans-serif',
-            eles: []
+            eles: [],
+        },
+        /**
+         * 背景图对象
+         */
+        bgi: {
+            t: 0,
+            l: 0,
+            w: 420,
+            h: 320
         },
         /**
          * 数据集合
@@ -144,8 +155,6 @@
             _.forEach(_this.mdl, function(o) {
                 Object.assign(o, data);
             })
-            console.log(_this.mdl);
-
         },
         delStr: function(str) {
             return parseInt(str.replace(/px/g, ""));

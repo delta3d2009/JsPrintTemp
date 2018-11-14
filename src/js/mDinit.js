@@ -73,12 +73,19 @@
 
         var a_sty_2F = getEle('div');
         a_sty_2F.className = 'a_sty_2F';
-        a_sty_2F.innerHTML = '<label for="" style="margin-left:0;">横向间距：</label>' +
-            '<input type="text" name="" id="mDrag_spert_x"><label for="">纵向间距：</label><input type="text" name="" id="mDrag_spert_y">' +
-            '<label for="">第一项的上边距：</label><input type="text" name="" id="mDrag_ft"><label for="">第一项的左边距：</label><input type="text" name="" id="mDrag_fl">' +
-            '<div class="a_ope_btn a_ope_btn_save sortBtn" style="margin-left:30px;">重新排序</div>';
+        a_sty_2F.innerHTML = '<label for="" style="margin-left:0;">横向间距(元素)：</label>' +
+            '<input type="text" name="" id="mDrag_spert_x"><label for="">纵向间距(元素)：</label><input type="text" name="" id="mDrag_spert_y">' +
+            '<label for="">第一项的上边距(元素)：</label><input type="text" name="" id="mDrag_ft"><label for="">第一项的左边距(元素)：</label><input type="text" name="" id="mDrag_fl">' +
+            '<label for="">最大宽度(元素)：</label><input type="text" name="" id="mDrag_max"><label for="">最小宽度(元素)：</label><input type="text" name="" id="mDrag_min">';
+
+        var a_sty_2F_bg = getEle('div');
+        a_sty_2F_bg.className = 'a_sty_2F';
+        a_sty_2F_bg.innerHTML = `<label for="" style="margin-left:0;">横向边距(背景)：</label>
+        <input type="text" name="" id="bg_mDrag_spert_x"><label for="">纵向边距(背景)：</label><input type="text" name="" id="bg_mDrag_spert_y"><label for="">宽(背景)：</label>
+        <input type="text" name="" id="bg_mDrag_spert_w"><label for="">高(背景)：</label><input type="text" name="" id="bg_mDrag_spert_h"><div class="a_ope_btn a_ope_btn_save sortBtn" style="margin-left:30px;">重新排序</div>`;
         a_sty.append(a_sty_lF);
         a_sty.append(a_sty_2F);
+        a_sty.append(a_sty_2F_bg);
 
         var a_sty_3F = getEle('div');
         a_sty_3F.className = 'a_sty_3F';

@@ -33,6 +33,7 @@
         const iid = 's' + createid();
         this.tag = getEle('div');
         this.tag.className = 'dymic';
+        $(this.tag).css({ 'min-width': mData.mData_global.ele_min_width, 'max-width': mData.mData_global.ele_max_width });
         this.tag.id = createid();
         this.childTag = getEle('div');
         this.childTag.className = 'dymic_txt';
@@ -42,8 +43,8 @@
         this.data.id = this.tag.id;
         new mDrag({ id: _this.tag.id, data: _this.data });
         var curid = "#" + _this.data.id;
-        var curh = $(curid).height();
-        var curw = $(curid).width();
+        var curh = $(curid).innerHeight();
+        var curw = $(curid).innerWidth();
         var cur_x = 0;
         var cur_y = 0;
         var curs = 0;
