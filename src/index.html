@@ -32,9 +32,7 @@
     $('.saveBtn').on('click', function(evt) {
         var LODOP = getCLodop();
         if (LODOP.webskt && LODOP.webskt.readyState == 1) {
-            console.log('提交数据包:');
             mData.tmp.eles = mData.mdl;
-            console.log(mData.tmp);
             //初始化打印任务
             LODOP.PRINT_INIT("模拟打印门票:");
             //画一张门票
@@ -42,12 +40,12 @@
             //全局风格/基本风格
             LODOP.SET_PRINT_STYLE("FontName", mData.mData_global.fontFamily);
             LODOP.SET_PRINT_STYLE("FontSize", mData.mData_global.fontSize);
+            LODOP.SET_PRINT_STYLE('Stretch', 1);
             //背景图
             var sortID = 1;
             var data = $('#tmp_bg_action').attr('src');
             if (data) {
                 LODOP.ADD_PRINT_IMAGE(mData.bgi.t, mData.bgi.l, mData.bgi.w, mData.bgi.h, data);
-                LODOP.SET_PRINT_STYLE('Stretch', 1);
                 sortID++;
             }
             //模板元素处理

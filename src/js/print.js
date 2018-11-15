@@ -31,3 +31,14 @@ function createResult(value) {
     div.innerHTML = value;
     document.body.append(div);
 }
+
+
+
+var qrcode = new QRCode("test", {
+    text: "http://www.runoob.com",
+    width: 128,
+    height: 128,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+});

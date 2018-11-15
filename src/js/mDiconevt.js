@@ -179,11 +179,9 @@
         }
     })
 
-    // $('.saveBtn').on('click', function(evt) {
-    //     console.log('提交数据包:');
-    //     mData.tmp.eles = mData.mdl;
-    //     console.log(mData.tmp);
-    // })
+    $('.saveBtn').on('click', function(evt) {
+        mData.tmp.eles = mData.mdl;
+    })
 
     $('.sortBtn').on('click', function(evt) {
         mData.mdl = _.sortBy(mData.mdl, ['order']);
