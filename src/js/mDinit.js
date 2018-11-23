@@ -9,21 +9,31 @@
     const data = [{
         id: 1,
         title: '打印项目1',
-        data: [
-            { filed: 'aaa', value: '分1' },
-            { filed: 'bbb', value: '分销2' },
-            { filed: 'ccc', value: '分销商3' },
-            { filed: 'ddd', value: '分销商商4' },
-        ]
+        data: {
+            filed1: 'aaa',
+            filed2: 'bbb',
+            filed3: 'ccc',
+            filed4: 'ddd',
+        },
+
     }, {
-        id: 1,
+        id: 2,
         title: '打印项目2',
-        data: [
-            { filed: 'eee', value: '项目商商商1' },
-            { filed: 'fff', value: '项目商商商商2' },
-            { filed: 'ggg', value: '项目商商商商商3' },
-            { filed: 'hhh', value: '项目商商商商商商4' },
-        ]
+        data: {
+            filed5: 'eee',
+            filed6: 'fff',
+            filed7: 'ggg',
+            filed8: 'hhh',
+            filed9: 'eee',
+            filed10: 'fff',
+            filed11: 'ggg',
+            filed12: 'hhh',
+            filed13: 'eee',
+            filed14: 'fff',
+            filed15: 'ggg',
+            filed16: 'hhh',
+        },
+
     }]
 
     function initDom(data) {
@@ -185,10 +195,13 @@
         for (let index = 0; index < data.length; index++) {
             const item = data[index];
             htmlText += '<ul class="acp_datawrap"><li class="acp_itemwrap separator-title"><span>' + item.title + '</span><i class="sui-icon icon-double-angle-up"></i></li>';
-            for (let i = 0; i < item.data.length; i++) {
-                const sub = item.data[i];
-                htmlText += '<li class="acp_itemwrap"><label id="acp_' + sub.filed + '" class="acp_cb checkbox-pretty inline checkbox" data-filed="' + sub.filed + '" data-val="' + sub.value + '"><span>' + sub.value + '</span></label></li>'
-            }
+            // for (let i = 0; i < item.data.length; i++) {
+            //     const sub = item.data[i];
+            //     htmlText += '<li class="acp_itemwrap"><label id="acp_' + sub.filed + '" class="acp_cb checkbox-pretty inline checkbox" data-filed="' + sub.filed + '" data-val="' + sub.value + '"><span>' + sub.value + '</span></label></li>'
+            // }
+            _.forEach(item.data, function(m, n) {
+                htmlText += '<li class="acp_itemwrap"><label id="acp_' + n + '" class="acp_cb checkbox-pretty inline checkbox" data-filed="' + n + '" data-val="' + m + '"><span>' + m + '</span></label></li>'
+            })
             htmlText += '</ul>';
         }
         htmlText += '</div>';
@@ -196,4 +209,5 @@
     }
 
     initDom(data);
+    $(".print-field-container").mCustomScrollbar();
 })(document)

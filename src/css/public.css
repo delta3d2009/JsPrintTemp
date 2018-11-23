@@ -112,3 +112,11 @@ input[type="color"],
 .sui-icon.icon-double-angle-down:before {
     content: "\e6e7";
 }
+
+.mCSB_inside>.mCSB_container {
+    margin-right: 0;
+}
+
+.mCSB_scrollTools {
+    visibility: hidden;
+}
