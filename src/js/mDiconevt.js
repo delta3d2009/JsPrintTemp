@@ -117,6 +117,7 @@
         if ($(this).hasClass('imgItem')) {
             var id = $(this).attr('id').replace(/name_/, '');
             document.getElementById(id).classList.add('active');
+            $("#" + id).css({ 'z-index': 999 });
         } else {
             mData.tmp.fontFamily = $(this).text();
         }
@@ -276,6 +277,7 @@
             $(this).parent().siblings('.mDrag_font_text').text($(this).text());
             var id = $(this).attr('id').replace(/name_/, '');
             document.getElementById(id).classList.add('active');
+            $("#" + id).css({ 'z-index': 999 });
         })
         document.getElementById('mDrag_vvv_imglist').appendChild(li);
     }
