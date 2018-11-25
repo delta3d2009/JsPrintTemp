@@ -24,10 +24,6 @@
         this.init();
     }
 
-    function createid() {
-        return 'm_' + (new Date()).getTime();
-    }
-
     addMPPI.prototype.init = function() {
         var _this = this;
         const iid = 's' + createid();
@@ -78,7 +74,10 @@
         document.getElementById(iid).addEventListener('click', function(evt) {
             document.getElementById(_this.tag.id).remove();
             var _obj = _.filter(mData.mdl, { id: _this.tag.id });
-            document.getElementById('acp_' + _obj[0].filed).classList.remove('checked');
+            var checkbox = document.getElementById('acp_' + _obj[0].filed);
+            if (checkbox) {
+                checkbox.classList.remove('checked');
+            }
             mData.delData(_this.tag.id);
         });
         document.getElementById(_this.tag.id).addEventListener('click', function(evt) {

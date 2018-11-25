@@ -28,6 +28,32 @@
             }
         })
     }
+    mData.tmp.bgi = JSON.parse(mData.tmp.bgi);
+    mData.tmp.eles = JSON.parse(mData.tmp.eles);
+    for (let index = 0; index < mData.tmp.bgi.length; index++) {
+        const item = mData.tmp.bgi[index];
+        var div = document.createElement('div');
+        if (index == 0) {
+            div.className = 'act_bg';
+        } else {
+            div.className = 'act_bg active';
+        }
+        div.id = item.id;
+        var img = new Image();
+        img.src = item.url;
+        div.appendChild(img);
+        document.getElementById('a_con_template').appendChild(div);
+    }
+
+    for (let index = 0; index < mData.tmp.eles.length; index++) {
+        const item = mData.tmp.eles[index];
+        item.container = "a_con_template";
+        new addMPPI(item);
+        var checkbox = document.getElementById('acp_' + item.filed);
+        if (checkbox) {
+            checkbox.classList.add('checked');
+        }
+    }
 
     function def() {
         $('#mDrag_tmpn').val(mData.tmp.name);
@@ -85,39 +111,59 @@
         }
     })
     document.getElementById('bg_mDrag_spert_x').addEventListener('keyup', function(evt) {
+        var id = $(".act_bg.active").attr('id');
         if (this.value) {
-            $(".act_bg").css({ 'left': parseInt(this.value) })
-            mData.bgi.l = parseInt(this.value);
+            $(".act_bg.active").css({ 'left': parseInt(this.value) })
+            var l = parseInt(this.value);
+            mData.update({ id: id, l: l })
         } else {
-            $(".act_bg").css({ 'left': 0 })
-            mData.bgi.l = 0;
+            $(".act_bg.active").css({ 'left': 0 })
+            mData.update({ id: id, l: 0 })
         }
     })
     document.getElementById('bg_mDrag_spert_w').addEventListener('keyup', function(evt) {
+        var id = $(".act_bg.active").attr('id');
         if (this.value) {
-            $(".act_bg").css({ 'width': parseInt(this.value) })
-            mData.bgi.w = parseInt(this.value);
+            $(".act_bg.active").css({ 'width': parseInt(this.value) })
+            var w = parseInt(this.value);
+            mData.update({ id: id, w: w })
         } else {
-            $(".act_bg").css({ 'width': mData.tmp.width })
-            mData.bgi.w = mData.tmp.width;
+            $(".act_bg.active").css({ 'width': mData.tmp.width })
+            mData.update({ id: id, w: mData.tmp.width })
         }
     })
     document.getElementById('bg_mDrag_spert_h').addEventListener('keyup', function(evt) {
+        var id = $(".act_bg.active").attr('id');
         if (this.value) {
-            $(".act_bg").css({ 'height': parseInt(this.value) })
-            mData.bgi.h = parseInt(this.value);
+            $(".act_bg.active").css({ 'height': parseInt(this.value) })
+            var h = parseInt(this.value);
+            mData.update({ id: id, h: h })
         } else {
-            $(".act_bg").css({ 'height': mData.tmp.height })
-            mData.bgi.h = mData.tmp.height;
+            $(".act_bg.active").css({ 'height': mData.tmp.height })
+            mData.update({ id: id, w: mData.tmp.height })
         }
     })
     document.getElementById('bg_mDrag_spert_y').addEventListener('keyup', function(evt) {
+        var id = $(".act_bg.active").attr('id');
         if (this.value) {
-            $(".act_bg").css({ 'top': parseInt(this.value) })
-            mData.bgi.t = parseInt(this.value);
+            $(".act_bg.active").css({ 'top': parseInt(this.value) })
+            var t = parseInt(this.value);
+            mData.update({ id: id, t: t })
         } else {
-            $(".act_bg").css({ 'top': 0 })
-            mData.bgi.t = 0;
+            $(".act_bg.active").css({ 'top': 0 })
+            mData.update({ id: id, t: 0 })
+        }
+    })
+
+    document.getElementById('bg_mDrag_spert_l').addEventListener('keyup', function(evt) {
+        var id = $(".act_bg.active").attr('id');
+        if (this.value) {
+            $(".act_bg.active").css({ 'z-index': parseInt(this.value) })
+            var level = parseInt(this.value);
+            mData.update({ id: id, level: level })
+        } else {
+            $(".act_bg.active").css({ 'z-index': 0 })
+            mData.update({ id: id, level: 0 })
         }
     })
 
@@ -205,10 +251,21 @@
     $("#backgroundFile").change(function(evt) {
         var file = this.files[0];
         var reader = new FileReader();
+        var div = document.createElement('div');
+        if (mData.imgs.length > 0) {
+            div.className = 'act_bg';
+        } else {
+            div.className = 'act_bg active';
+        }
+        div.id = createid();
+        var img = new Image();
         var imgFile;
         reader.onload = function(e) {
             imgFile = e.target.result;
-            $("#tmp_bg_action").attr('src', imgFile);
+            img.src = imgFile;
+            div.appendChild(img);
+            document.getElementById('a_con_template').appendChild(div);
+            mData.add(new mData.bgi(div.id, file.name, 0, 0, mData.tmp.height, mData.tmp.width, '', 0));
         };
         reader.readAsDataURL(file);
     });
@@ -275,6 +332,11 @@
                 mData.updData({ id: id, underline: 0 });
             }
         }
+    })
+
+    $('.act_bg').on('click', function(evt) {
+        $('.act_bg').removeClass('active');
+        $(this).addClass('active');
     })
 
     $('.mDrag_el_justify').on('click', function(evt) {

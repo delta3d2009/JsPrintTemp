@@ -272,7 +272,7 @@ div#mDrag_dymic_parm {
     position: absolute;
     height: fit-content;
     padding: 5px 5px;
-    z-index: 10;
+    z-index: 1000;
     cursor: move;
     border: 1px solid #000;
     width: fit-content;
@@ -318,7 +318,7 @@ div#mDrag_dymic_parm {
 .mDrag_fontdropdownlist {
     position: absolute;
     top: 25px;
-    z-index: 100;
+    z-index: 10000;
     display: none;
 }
 
@@ -430,6 +430,7 @@ ul.acp_datawrap {
     background: #F5F5F5;
     box-sizing: border-box;
     overflow: hidden;
+    left: 100px;
 }
 
 .acp_itemwrap {
@@ -482,4 +483,8 @@ ul.acp_datawrap {
 .radio-pretty.checked>span:before {
     content: "\e607";
     color: #28a3ef;
+}
+
+.act_bg.active {
+    border: 1px solid #263d4b;
 }

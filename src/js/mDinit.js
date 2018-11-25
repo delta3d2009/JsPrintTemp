@@ -1,10 +1,9 @@
+function createid() {
+    return 'm_' + (new Date()).getTime();
+}
 (function(doc) {
     function getEle(tag) {
         return doc.createElement(tag);
-    }
-
-    function createid() {
-        return 'v_' + Math.random() * 10000000000000000;
     }
     const data = [{
         id: 1,
@@ -51,7 +50,7 @@
         saveBtn.innerHTML = '保存模板';
         var a_ope_btn_change = getEle('div');
         a_ope_btn_change.className = 'a_ope_btn a_ope_btn_change';
-        a_ope_btn_change.innerHTML = '更换背景图<input type="file" name="file" accept="image/*" id="backgroundFile">';
+        a_ope_btn_change.innerHTML = '添加图片<input type="file" name="file" accept="image/*" id="backgroundFile">';
         a_ope.append(saveBtn);
         a_ope.append(a_ope_btn_change);
 
@@ -60,26 +59,39 @@
         a_sty.className = 'a_sty';
         var a_sty_lF = getEle('div');
         a_sty_lF.className = 'a_sty_lF';
-        a_sty_lF.innerHTML = '<label for="" style="margin-left:0;">模板名称：' +
-            '</label><input type="text" name="" id="mDrag_tmpn">' +
-            '<label for="">模板尺寸：宽</label>' +
-            '<input class="mDrag_tmph" type="text" name="" id="mDrag_tmpw" style="width:30px;"> ✖高' +
-            '<input class="mDrag_tmpw" type="text" name="" id="mDrag_tmph" style="width:30px;">' +
-            '<label for="">偏移调整：</label>' +
-            '<span class="mDrag_arrow mDrag_up arrow arrow-up"></span>' +
-            '<input type="text" name="" id="mDrag_hdx" style="width:30px;" value="0">' +
-            '<span class="mDrag_arrow mDrag_down arrow arrow-down"></span>' +
-            '<span class="mDrag_arrow mDrag_left arrow arrow-left" style="margin-left:20px;"></span>' +
-            '<input type="text" name="" id="mDrag_wdy" style="width:30px;" value="0">' +
-            '<span class="mDrag_arrow mDrag_right arrow arrow-right"></span>' +
-            '<label for="">字体：</label>' +
-            '<span class="mDrag_font" style="width:30px">' +
-            '<span id="mDrag_f_s" class="mDrag_font_text">20</span><span class="mDrag_font_icon"></span>' +
-            '<ul class="mDrag_font_droplist" style="display:none;">' +
-            '<li class="font_t">15</li><li class="font_t">16</li><li class="font_t">17</li><li class="font_t">18</li><li class="font_t">19</li></ul>' +
-            '</span><label for="">字号：</label><span class="mDrag_font" style="width:300px"><span id="mDrag_f_t" class="mDrag_font_text">宋体</span><span class="mDrag_font_icon"></span>' +
-            '<ul class="mDrag_font_droplist" style="display:none;">' +
-            '<li class="font_f">宋体</li><li class="font_f">新宋体</li><li class="font_f">黑体</li><li class="font_f">微软雅黑</li><li class="font_f">楷体</li></ul></span>';
+        var fontHtml = '';
+        var fontHtml2 = '';
+        for (let index = 0; index < mDataInit.fontFamilyList.length; index++) {
+            const item = mDataInit.fontFamilyList[index];
+            fontHtml += '<li class="font_f" style="font-family:' + item + '">' + item + '</li>';
+            fontHtml2 += '<li class="DFL_item" style="font-family:' + item + '">' + item + '</li>'
+        }
+        var fontSizeHtml = '';
+        var fontSizeHtml2 = '';
+        for (let index = 0; index < mDataInit.fontSizeList.length; index++) {
+            const item = mDataInit.fontSizeList[index];
+            fontSizeHtml += '<li class="font_t" style="font-size:' + item + 'px">' + item + '</li>';
+            fontSizeHtml2 += '<li class="DFL_item_size" style="font-size:' + item + 'px;height: auto;">' + item + '</li>';
+        }
+        a_sty_lF.innerHTML = `<label for="" style="margin-left:0;">模板名称：
+            </label><input type="text" name="" id="mDrag_tmpn">
+            <label for="">模板尺寸：宽</label>
+            <input class="mDrag_tmph" type="text" name="" id="mDrag_tmpw" style="width:30px;"> ✖高
+            <input class="mDrag_tmpw" type="text" name="" id="mDrag_tmph" style="width:30px;">
+            <label for="">偏移调整：</label>
+            <span class="mDrag_arrow mDrag_up arrow arrow-up"></span>
+            <input type="text" name="" id="mDrag_hdx" style="width:30px;" value="0">
+            <span class="mDrag_arrow mDrag_down arrow arrow-down"></span>
+            <span class="mDrag_arrow mDrag_left arrow arrow-left" style="margin-left:20px;"></span>
+            <input type="text" name="" id="mDrag_wdy" style="width:30px;" value="0">
+            <span class="mDrag_arrow mDrag_right arrow arrow-right"></span>
+            <label for="">字号：</label>
+            <span class="mDrag_font" style="width:80px">
+            <span id="mDrag_f_s" class="mDrag_font_text">20</span><span class="mDrag_font_icon"></span>
+            <ul class="mDrag_font_droplist" style="display:none;">` + fontSizeHtml + `</ul>
+            </span><label for="">字体：</label><span class="mDrag_font" style="width:300px"><span id="mDrag_f_t" class="mDrag_font_text">宋体</span><span class="mDrag_font_icon"></span>
+            <ul class="mDrag_font_droplist" style="display:none;">
+            ` + fontHtml + `</ul></span>`;
 
         var a_sty_2F = getEle('div');
         a_sty_2F.className = 'a_sty_2F';
@@ -90,9 +102,13 @@
 
         var a_sty_2F_bg = getEle('div');
         a_sty_2F_bg.className = 'a_sty_2F';
-        a_sty_2F_bg.innerHTML = `<label for="" style="margin-left:0;">横向边距(背景)：</label>
-        <input type="text" name="" id="bg_mDrag_spert_x"><label for="">纵向边距(背景)：</label><input type="text" name="" id="bg_mDrag_spert_y"><label for="">宽(背景)：</label>
-        <input type="text" name="" id="bg_mDrag_spert_w"><label for="">高(背景)：</label><input type="text" name="" id="bg_mDrag_spert_h"><div class="a_ope_btn a_ope_btn_save sortBtn" style="margin-left:30px;">重新排序</div>`;
+        a_sty_2F_bg.innerHTML = `<label for="" style="margin-left:0;">横向边距(图片)：</label>
+        <input type="text" name="" id="bg_mDrag_spert_x"><label for="">纵向边距(图片)：</label>
+        <input type="text" name="" id="bg_mDrag_spert_y"><label for="">宽(图片)：</label>
+        <input type="text" name="" id="bg_mDrag_spert_w"><label for="">高(图片)：</label>
+        <input type="text" name="" id="bg_mDrag_spert_h"><label for="">层级(图片)：</label>
+        <input type="text" name="" id="bg_mDrag_spert_l">
+        <div class="a_ope_btn a_ope_btn_save sortBtn" style="margin-left:30px;">重新排序</div>`;
         a_sty.append(a_sty_lF);
         a_sty.append(a_sty_2F);
         a_sty.append(a_sty_2F_bg);
@@ -105,15 +121,7 @@
         <div class="mDrag_fontdropdownlist">
             <div class="DFL_wrap">
                 <ul class="DFL_boe">
-                    <li class="DFL_item" style="font-family:宋体">
-                        宋体
-                    </li>
-                    <li class="DFL_item" style="font-family:黑体">
-                        黑体
-                    </li>
-                    <li class="DFL_item" style="font-family:楷体">
-                        楷体
-                    </li>
+                    ` + fontHtml2 + `
                 </ul>
             </div>
         </div>
@@ -122,24 +130,7 @@
         <div class="mDrag_fontdropdownlist">
             <div class="DFL_wrap">
                 <ul class="DFL_boe">
-                    <li class="DFL_item_size" style="font-size:12pxheight: auto;">
-                        12
-                    </li>
-                    <li class="DFL_item_size" style="font-size:14px;height: auto;">
-                        14
-                    </li>
-                    <li class="DFL_item_size" style="font-size:16px;height: auto;">
-                        16
-                    </li>
-                    <li class="DFL_item_size" style="font-size:20px;height: auto;">
-                        20
-                    </li>
-                    <li class="DFL_item_size" style="font-size:26px;height: auto;">
-                        26
-                    </li>
-                    <li class="DFL_item_size" style="font-size:32px;height: auto;">
-                        32
-                    </li>
+                    ` + fontSizeHtml2 + `
                 </ul>
             </div>
         </div>
@@ -172,7 +163,7 @@
         var boc = getEle('div');
         boc.className = 'a_con_template';
         boc.id = 'a_con_template';
-        boc.innerHTML = '<div class="act_bg"><img id="tmp_bg_action" src="./img/print/a.jpg" alt="" srcset=""> </div>';
+        boc.innerHTML = '';
         boo.append(boc);
 
 

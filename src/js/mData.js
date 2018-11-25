@@ -84,6 +84,8 @@
          * 
          */
         tmp: {
+            printId: 0,
+            isDel: "",
             name: 'xxx_lpp',
             height: 320,
             width: 420,
@@ -93,21 +95,47 @@
             fontColor: '#000',
             fontFamily: 'tahoma, "Microsoft Yahei", "SimSun", sans-serif',
             eles: [],
+            bgi: [],
         },
         /**
          * 背景图对象
          */
-        bgi: {
-            t: 0,
-            l: 0,
-            w: 420,
-            h: 320,
-            url: ''
+        bgi: function(_id, _name, _t, _l, _w, _h, _url, _level) {
+            this.id = _id;
+            this.name = _name;
+            this.t = _t;
+            this.l = _l;
+            this.w = _w;
+            this.h = _h;
+            this.url = _url;
+            this.level = _level;
         },
         /**
          * 数据集合
          */
         mdl: [],
+        /**
+         * 图片集合
+         */
+        imgs: [],
+        add: function(obj) {
+            this.imgs.push(obj);
+        },
+        remove: function(id) {
+            var _this = this;
+            _this.imgs = _.filter(_this.imgs, function(o) {
+                return o.id !== id;
+            })
+        },
+        update: function(data) {
+            var _this = this;
+            var obj = _.find(_this.imgs, { id: data.id });
+            Object.assign(obj, data);
+            _this.imgs = _.filter(_this.imgs, function(o) {
+                return o.id !== data.id;
+            })
+            _this.imgs.push(obj);
+        },
         preMax: {},
         addPre: function(data) {
             var _this = this;
@@ -160,6 +188,10 @@
         delStr: function(str) {
             return parseInt(str.replace(/px/g, ""));
         }
+    }
+    if (mDataInit.editTmp.printId != 0) {
+        mData.tmp = mDataInit.editTmp;
+        mData.imgs = JSON.parse(mDataInit.editTmp.bgi);
     }
     return mData;
 })())
