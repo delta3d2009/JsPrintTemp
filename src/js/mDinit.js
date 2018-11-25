@@ -87,9 +87,9 @@ function createid() {
             <span class="mDrag_arrow mDrag_right arrow arrow-right"></span>
             <label for="">字号：</label>
             <span class="mDrag_font" style="width:80px">
-            <span id="mDrag_f_s" class="mDrag_font_text">20</span><span class="mDrag_font_icon"></span>
+            <span id="mDrag_f_s" style="width:80px;height: 100%;" class="mDrag_font_text">20</span><span class="mDrag_font_icon"></span>
             <ul class="mDrag_font_droplist" style="display:none;">` + fontSizeHtml + `</ul>
-            </span><label for="">字体：</label><span class="mDrag_font" style="width:300px"><span id="mDrag_f_t" class="mDrag_font_text">宋体</span><span class="mDrag_font_icon"></span>
+            </span><label for="">字体：</label><span class="mDrag_font" style="width:300px"><span style="width:300px;height: 100%;" id="mDrag_f_t" class="mDrag_font_text">宋体</span><span class="mDrag_font_icon"></span>
             <ul class="mDrag_font_droplist" style="display:none;">
             ` + fontHtml + `</ul></span>`;
 
@@ -102,7 +102,15 @@ function createid() {
 
         var a_sty_2F_bg = getEle('div');
         a_sty_2F_bg.className = 'a_sty_2F';
-        a_sty_2F_bg.innerHTML = `<label for="" style="margin-left:0;">横向边距(图片)：</label>
+        var imgHtml = '';
+        var imglist = JSON.parse(mDataInit.editTmp.bgi);
+        for (let index = 0; index < imglist.length; index++) {
+            const item = imglist[index];
+            imgHtml += '<li id="name_' + item.id + '" class="font_f imgItem">' + item.name + '</li>';
+        }
+        a_sty_2F_bg.innerHTML = `<label for="" style="margin-left:0;">选择图片：</label><span class="mDrag_font" style="width:300px"><span id="mDrag_f_i" style="width:300px;height: 100%;" class="mDrag_font_text"></span><span class="mDrag_font_icon"></span>
+        <ul id="mDrag_vvv_imglist" class="mDrag_font_droplist" style="display:none;">
+        ` + imgHtml + `</ul></span><label for=""><button class="delBgimg">删除背景</button></label><label for="">横向边距(图片)：</label>
         <input type="text" name="" id="bg_mDrag_spert_x"><label for="">纵向边距(图片)：</label>
         <input type="text" name="" id="bg_mDrag_spert_y"><label for="">宽(图片)：</label>
         <input type="text" name="" id="bg_mDrag_spert_w"><label for="">高(图片)：</label>

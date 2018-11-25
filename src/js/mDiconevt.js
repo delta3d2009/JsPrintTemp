@@ -12,6 +12,9 @@
         if (evt.target.id !== 'mDrag_do_gone_boom') {
             $("#mDrag_do_gone_boom").siblings('.mDrag_fontdropdownlist').hide('slow');
         }
+        if (evt.target.id !== 'mDrag_f_i') {
+            $("#mDrag_f_i").siblings('.mDrag_font_droplist').hide('slow');
+        }
     })
     var spans = document.getElementsByClassName('mDrag_arrow');
     for (let index = 0; index < spans.length; index++) {
@@ -98,9 +101,25 @@
         mData.tmp.fontSize = $(this).text();
     })
 
+    $(".delBgimg").on('click', function(evt) {
+        var acti = $(".act_bg.active");
+        if (acti) {
+            var id = acti.attr('id');
+            document.getElementById(id).remove();
+            document.getElementById('name_' + id).remove();
+            document.getElementById('mDrag_f_i').innerHTML = '';
+            mData.remove(id);
+        }
+    })
+
     $('.font_f').on('click', function(evt) {
         $(this).parent().siblings('.mDrag_font_text').text($(this).text());
-        mData.tmp.fontFamily = $(this).text();
+        if ($(this).hasClass('imgItem')) {
+            var id = $(this).attr('id').replace(/name_/, '');
+            document.getElementById(id).classList.add('active');
+        } else {
+            mData.tmp.fontFamily = $(this).text();
+        }
     })
 
     document.getElementById('mDrag_spert_x').addEventListener('keyup', function(evt) {
@@ -247,6 +266,20 @@
         });
     })
 
+    function appendImgList(id, text) {
+        var li = document.createElement('li');
+        li.id = 'name_' + id;
+        li.className = 'font_f imgItem';
+        li.dataImgid = id;
+        li.innerHTML = text;
+        li.addEventListener('click', function(evt) {
+            $(this).parent().siblings('.mDrag_font_text').text($(this).text());
+            var id = $(this).attr('id').replace(/name_/, '');
+            document.getElementById(id).classList.add('active');
+        })
+        document.getElementById('mDrag_vvv_imglist').appendChild(li);
+    }
+
 
     $("#backgroundFile").change(function(evt) {
         var file = this.files[0];
@@ -266,6 +299,7 @@
             div.appendChild(img);
             document.getElementById('a_con_template').appendChild(div);
             mData.add(new mData.bgi(div.id, file.name, 0, 0, mData.tmp.height, mData.tmp.width, '', 0));
+            appendImgList(div.id, file.name);
         };
         reader.readAsDataURL(file);
     });
