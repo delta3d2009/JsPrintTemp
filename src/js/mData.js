@@ -189,7 +189,7 @@
             return parseInt(str.replace(/px/g, ""));
         }
     }
-    if (mDataInit.editTmp.printId != 0) {
+    if (mDataInit.editTmp.printId) {
         mData.tmp = mDataInit.editTmp;
         mData.imgs = JSON.parse(mDataInit.editTmp.bgi);
     }

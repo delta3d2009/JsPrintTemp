@@ -31,31 +31,33 @@
             }
         })
     }
-    mData.tmp.bgi = JSON.parse(mData.tmp.bgi);
-    mData.tmp.eles = JSON.parse(mData.tmp.eles);
-    for (let index = 0; index < mData.tmp.bgi.length; index++) {
-        const item = mData.tmp.bgi[index];
-        var div = document.createElement('div');
-        if (index == 0) {
-            div.className = 'act_bg';
-        } else {
-            div.className = 'act_bg active';
+    if (mDataInit.editTmp.printId) {
+        mData.tmp.bgi = JSON.parse(mData.tmp.bgi);
+        for (let index = 0; index < mData.tmp.bgi.length; index++) {
+            const item = mData.tmp.bgi[index];
+            var div = document.createElement('div');
+            if (index == 0) {
+                div.className = 'act_bg';
+            } else {
+                div.className = 'act_bg active';
+            }
+            div.id = item.id;
+            var img = new Image();
+            img.src = item.url;
+            div.appendChild(img);
+            document.getElementById('a_con_template').appendChild(div);
         }
-        div.id = item.id;
-        var img = new Image();
-        img.src = item.url;
-        div.appendChild(img);
-        document.getElementById('a_con_template').appendChild(div);
-    }
+        mData.tmp.eles = JSON.parse(mData.tmp.eles);
+        for (let index = 0; index < mData.tmp.eles.length; index++) {
+            const item = mData.tmp.eles[index];
+            item.container = "a_con_template";
+            new addMPPI(item);
+            var checkbox = document.getElementById('acp_' + item.filed);
+            if (checkbox) {
+                checkbox.classList.add('checked');
+            }
+        }
 
-    for (let index = 0; index < mData.tmp.eles.length; index++) {
-        const item = mData.tmp.eles[index];
-        item.container = "a_con_template";
-        new addMPPI(item);
-        var checkbox = document.getElementById('acp_' + item.filed);
-        if (checkbox) {
-            checkbox.classList.add('checked');
-        }
     }
 
     function def() {
@@ -257,7 +259,7 @@
             if (k == 0) {
                 curaddTop = mData.mData_global.first_top;
             } else {
-                curaddTop += mData.mData_global.interval_y + v.height;
+                curaddTop += mData.mData_global.interval_y + parseInt(v.height);
             }
             if (v.col == 1) {
                 curaddLeft = mData.mData_global.first_left;

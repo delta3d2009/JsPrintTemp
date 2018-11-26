@@ -103,10 +103,12 @@ function createid() {
         var a_sty_2F_bg = getEle('div');
         a_sty_2F_bg.className = 'a_sty_2F';
         var imgHtml = '';
-        var imglist = JSON.parse(mDataInit.editTmp.bgi);
-        for (let index = 0; index < imglist.length; index++) {
-            const item = imglist[index];
-            imgHtml += '<li id="name_' + item.id + '" class="font_f imgItem">' + item.name + '</li>';
+        if (mDataInit.editTmp.bgi) {
+            var imglist = JSON.parse(mDataInit.editTmp.bgi);
+            for (let index = 0; index < imglist.length; index++) {
+                const item = imglist[index];
+                imgHtml += '<li id="name_' + item.id + '" class="font_f imgItem">' + item.name + '</li>';
+            }
         }
         a_sty_2F_bg.innerHTML = `<label for="" style="margin-left:0;">选择图片：</label><span class="mDrag_font" style="width:300px"><span id="mDrag_f_i" style="width:300px;height: 100%;" class="mDrag_font_text"></span><span class="mDrag_font_icon"></span>
         <ul id="mDrag_vvv_imglist" class="mDrag_font_droplist" style="display:none;">
