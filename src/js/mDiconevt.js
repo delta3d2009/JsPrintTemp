@@ -49,7 +49,7 @@
                 img1.src = b64d;
                 div.appendChild(img1);
                 document.getElementById('a_con_template').appendChild(div);
-                $(div).width(item.w);
+                $(div).css({width:item.w,top:item.t,left:item.l});
             })
         }
         mData.tmp.eles = JSON.parse(mData.tmp.eles);
@@ -77,6 +77,8 @@
         $('#mDrag_spert_y').val(mData.mData_global.interval_y);
         $('#mDrag_ft').val(mData.mData_global.first_top);
         $('#mDrag_fl').val(mData.mData_global.first_left);
+        $('#a_con_template').width(mData.tmp.width);
+        $('#a_con_template').height(mData.tmp.height);
     }
     def();
     document.getElementById('mDrag_tmpn').addEventListener('keyup', function(evt) {
@@ -423,8 +425,6 @@
         var ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         var dataURL = canvas.toDataURL();
-        console.log(img,dataURL);
-        
         return dataURL;
     }
 
