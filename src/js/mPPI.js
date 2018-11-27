@@ -21,16 +21,54 @@
         this.height = par.height;
         this.data = new mData.mPar('', this.filed, this.val, this.x, this.y, this.order);
         this.container = getE(par.container);
-        this.init();
+        if (par.id) {
+            this.show(par);
+        } else {
+            this.init();
+        }
+    }
+
+    addMPPI.prototype.show = function(par) {
+        var _this = this;
+        const iid = 's' + par.id;
+        this.tag = getEle('div');
+        this.tag.className = 'dymic';
+        $(this.tag).css({ 'min-width': mData.mData_global.ele_min_width, 'max-width': mData.mData_global.ele_max_width });
+        this.tag.id = par.id;
+        this.childTag = getEle('div');
+        this.childTag.className = 'dymic_txt';
+        this.childTag.innerHTML = '<span class="filed" id="va' + iid + '">' + this.val + '</span><span class="acf_icon"><img id="' + iid + '" src="../img/print/remove.png" alt=""></span>';
+        this.tag.append(this.childTag);
+        this.container.append(this.tag);
+        new mDrag({ id: par.id, data: par });
+        var curid = "#" + _this.tag.id;
+        $(curid).css({ 'top': parseInt(par.y), 'left': parseInt(par.x) });
+        document.getElementById(iid).addEventListener('click', function(evt) {
+            document.getElementById(_this.tag.id).remove();
+            var _obj = _.filter(mData.mdl, { id: _this.tag.id });
+            var checkbox = document.getElementById('acp_' + _obj[0].filed);
+            if (checkbox) {
+                checkbox.classList.remove('checked');
+            }
+            mData.delData(_this.tag.id);
+        });
+        document.getElementById(_this.tag.id).addEventListener('click', function(evt) {
+            var labs = document.getElementsByClassName('dymic');
+            for (let index = 0; index < labs.length; index++) {
+                labs[index].className = 'dymic';
+            }
+            this.className = 'dymic active';
+        })
     }
 
     addMPPI.prototype.init = function() {
         var _this = this;
-        const iid = 's' + createid();
+        const mid = createid();
+        const iid = 's' + mid;
         this.tag = getEle('div');
         this.tag.className = 'dymic';
         $(this.tag).css({ 'min-width': mData.mData_global.ele_min_width, 'max-width': mData.mData_global.ele_max_width });
-        this.tag.id = createid();
+        this.tag.id = mid;
         this.childTag = getEle('div');
         this.childTag.className = 'dymic_txt';
         this.childTag.innerHTML = '<span class="filed" id="va' + iid + '">' + this.val + '</span><span class="acf_icon"><img id="' + iid + '" src="../img/print/remove.png" alt=""></span>';
