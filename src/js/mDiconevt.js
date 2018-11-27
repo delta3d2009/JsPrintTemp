@@ -35,17 +35,17 @@
         mData.tmp.bgi = JSON.parse(mData.tmp.bgi);
         for (let index = 0; index < mData.tmp.bgi.length; index++) {
             const item = mData.tmp.bgi[index];
-            var div = document.createElement('div');
-            if (index == 0) {
-                div.className = 'act_bg';
-            } else {
-                div.className = 'act_bg active';
-            }
-            div.id = item.id;
             var img = new Image();
             img.src = item.url;
             img.onload = function() {
-                var b64d = getBase64Image(img);
+                var b64d = getBase64Image(img,80,80);
+                var div = document.createElement('div');
+                if (index == 0) {
+                    div.className = 'act_bg';
+                } else {
+                    div.className = 'act_bg active';
+                }
+                div.id = item.id;
                 var img1 = new Image();
                 img1.src = b64d;
                 div.appendChild(img1);
