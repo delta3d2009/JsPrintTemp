@@ -44,8 +44,13 @@
             div.id = item.id;
             var img = new Image();
             img.src = item.url;
-            div.appendChild(img);
-            document.getElementById('a_con_template').appendChild(div);
+            img.onload = function() {
+                var b64d = getBase64Image(img);
+                var img1 = new Image();
+                img1.src = b64d;
+                div.appendChild(img1);
+                document.getElementById('a_con_template').appendChild(div);
+            }
         }
         mData.tmp.eles = JSON.parse(mData.tmp.eles);
         for (let index = 0; index < mData.tmp.eles.length; index++) {
@@ -411,6 +416,15 @@
         return document.getElementById(el);
     }
 
+    function getBase64Image(img,width,height) {
+        var canvas = document.createElement("canvas");
+        canvas.width = width ? width : img.width;
+        canvas.height = height ? height : img.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        var dataURL = canvas.toDataURL();
+        return dataURL;
+    }
 
     var checkboxs = document.getElementsByClassName('acp_cb');
     for (let index = 0; index < checkboxs.length; index++) {
