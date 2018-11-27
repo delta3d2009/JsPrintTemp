@@ -1,5 +1,5 @@
-(function($) {
-    document.addEventListener('click', function(evt) {
+(function ($) {
+    document.addEventListener('click', function (evt) {
         if (evt.target.id !== 'mDrag_f_s') {
             $("#mDrag_f_s").siblings('.mDrag_font_droplist').hide('slow');
         }
@@ -19,7 +19,7 @@
     var spans = document.getElementsByClassName('mDrag_arrow');
     for (let index = 0; index < spans.length; index++) {
         const e = spans[index];
-        e.addEventListener('click', function(evt) {
+        e.addEventListener('click', function (evt) {
             if (this.classList.contains('arrow-up')) {
                 cal('mDrag_hdx', 'x', true);
             } else if (this.classList.contains('arrow-down')) {
@@ -37,7 +37,7 @@
             const item = mData.tmp.bgi[index];
             var img = new Image();
             img.src = item.url;
-            imgloadcomplete(img).done(function(b64d) {
+            imgloadcomplete(img).done(function (b64d) {
                 var div = document.createElement('div');
                 if (index == 0) {
                     div.className = 'act_bg';
@@ -49,7 +49,7 @@
                 img1.src = b64d;
                 div.appendChild(img1);
                 document.getElementById('a_con_template').appendChild(div);
-                $(div).css({width:item.w,top:item.t,left:item.l});
+                $(div).css({ width: item.w, top: item.t, left: item.l });
             })
         }
         mData.tmp.eles = JSON.parse(mData.tmp.eles);
@@ -81,36 +81,36 @@
         $('#a_con_template').height(mData.tmp.height);
     }
     def();
-    document.getElementById('mDrag_tmpn').addEventListener('keyup', function(evt) {
+    document.getElementById('mDrag_tmpn').addEventListener('keyup', function (evt) {
         if (this.value) {
             mData.tmp.name = this.value;
         }
     })
 
-    document.getElementById('mDrag_tmph').addEventListener('keyup', function(evt) {
+    document.getElementById('mDrag_tmph').addEventListener('keyup', function (evt) {
         if (parseInt(this.value) !== 0) {
             document.getElementById('a_con_template').style.height = this.value + 'px';
             mData.tmp.height = parseInt(this.value);
         }
     })
 
-    document.getElementById('mDrag_tmpw').addEventListener('keyup', function(evt) {
+    document.getElementById('mDrag_tmpw').addEventListener('keyup', function (evt) {
         if (parseInt(this.value) !== 0) {
             document.getElementById('a_con_template').style.width = this.value + 'px';
             mData.tmp.width = parseInt(this.value);
         }
     })
 
-    $('.mDrag_font').on('click', function(evt) {
+    $('.mDrag_font').on('click', function (evt) {
         $(this).children('.mDrag_font_droplist').toggle('active');
     })
 
-    $('.font_t').on('click', function(evt) {
+    $('.font_t').on('click', function (evt) {
         $(this).parent().siblings('.mDrag_font_text').text($(this).text());
         mData.tmp.fontSize = $(this).text();
     })
 
-    $(".delBgimg").on('click', function(evt) {
+    $(".delBgimg").on('click', function (evt) {
         var acti = $(".act_bg.active");
         if (acti) {
             var id = acti.attr('id');
@@ -121,7 +121,7 @@
         }
     })
 
-    $('.font_f').on('click', function(evt) {
+    $('.font_f').on('click', function (evt) {
         $(this).parent().siblings('.mDrag_font_text').text($(this).text());
         if ($(this).hasClass('imgItem')) {
             var id = $(this).attr('id').replace(/name_/, '');
@@ -132,14 +132,14 @@
         }
     })
 
-    document.getElementById('mDrag_spert_x').addEventListener('keyup', function(evt) {
+    document.getElementById('mDrag_spert_x').addEventListener('keyup', function (evt) {
         if (this.value) {
             mData.mData_global.interval_x = parseInt(this.value);
         } else {
             mData.mData_global.interval_x = 0;
         }
     })
-    document.getElementById('bg_mDrag_spert_x').addEventListener('keyup', function(evt) {
+    document.getElementById('bg_mDrag_spert_x').addEventListener('keyup', function (evt) {
         var id = $(".act_bg.active").attr('id');
         if (this.value) {
             $(".act_bg.active").css({ 'left': parseInt(this.value) })
@@ -150,7 +150,7 @@
             mData.update({ id: id, l: 0 })
         }
     })
-    document.getElementById('bg_mDrag_spert_w').addEventListener('keyup', function(evt) {
+    document.getElementById('bg_mDrag_spert_w').addEventListener('keyup', function (evt) {
         var id = $(".act_bg.active").attr('id');
         if (this.value) {
             $(".act_bg.active").css({ 'width': parseInt(this.value) })
@@ -161,7 +161,7 @@
             mData.update({ id: id, w: mData.tmp.width })
         }
     })
-    document.getElementById('bg_mDrag_spert_h').addEventListener('keyup', function(evt) {
+    document.getElementById('bg_mDrag_spert_h').addEventListener('keyup', function (evt) {
         var id = $(".act_bg.active").attr('id');
         if (this.value) {
             $(".act_bg.active").css({ 'height': parseInt(this.value) })
@@ -172,7 +172,7 @@
             mData.update({ id: id, w: mData.tmp.height })
         }
     })
-    document.getElementById('bg_mDrag_spert_y').addEventListener('keyup', function(evt) {
+    document.getElementById('bg_mDrag_spert_y').addEventListener('keyup', function (evt) {
         var id = $(".act_bg.active").attr('id');
         if (this.value) {
             $(".act_bg.active").css({ 'top': parseInt(this.value) })
@@ -184,7 +184,7 @@
         }
     })
 
-    document.getElementById('bg_mDrag_spert_l').addEventListener('keyup', function(evt) {
+    document.getElementById('bg_mDrag_spert_l').addEventListener('keyup', function (evt) {
         var id = $(".act_bg.active").attr('id');
         if (this.value) {
             $(".act_bg.active").css({ 'z-index': parseInt(this.value) })
@@ -196,7 +196,7 @@
         }
     })
 
-    document.getElementById('mDrag_ft').addEventListener('keyup', function(evt) {
+    document.getElementById('mDrag_ft').addEventListener('keyup', function (evt) {
         if (this.value) {
             mData.mData_global.first_top = parseInt(this.value);
         } else {
@@ -204,7 +204,7 @@
         }
     })
 
-    document.getElementById('mDrag_fl').addEventListener('keyup', function(evt) {
+    document.getElementById('mDrag_fl').addEventListener('keyup', function (evt) {
         if (this.value) {
             mData.mData_global.first_left = parseInt(this.value);
         } else {
@@ -212,7 +212,7 @@
         }
     });
 
-    $(".mDrag_el_color").bigColorpicker(function(el, color) {
+    $(".mDrag_el_color").bigColorpicker(function (el, color) {
         if ($('.dymic').hasClass('active')) {
             var id = $('.dymic.active').attr('id');
             $('#vas' + id).css({ 'color': color });
@@ -220,7 +220,7 @@
         }
     });
 
-    $('.show-print-items').on('click', function(evt) {
+    $('.show-print-items').on('click', function (evt) {
         if ($(this).children('.sui-icon').hasClass('icon-double-angle-up')) {
             $(this).children('.sui-icon').removeClass('icon-double-angle-up');
             $(this).children('.sui-icon').addClass('icon-double-angle-down');
@@ -236,7 +236,7 @@
         }
     })
 
-    $(".separator-title").on('click', function(params) {
+    $(".separator-title").on('click', function (params) {
         if ($(this).children('.sui-icon').hasClass('icon-double-angle-up')) {
             $(this).children('.sui-icon').removeClass('icon-double-angle-up');
             $(this).children('.sui-icon').addClass('icon-double-angle-down');
@@ -254,15 +254,15 @@
         }
     })
 
-    $('.saveBtn').on('click', function(evt) {
+    $('.saveBtn').on('click', function (evt) {
         mData.tmp.eles = mData.mdl;
     })
 
-    $('.sortBtn').on('click', function(evt) {
+    $('.sortBtn').on('click', function (evt) {
         mData.mdl = _.sortBy(mData.mdl, ['order']);
         let curaddTop = 0;
         let curaddLeft = 0;
-        _.forEach(mData.mdl, function(v, k) {
+        _.forEach(mData.mdl, function (v, k) {
             if (k == 0) {
                 curaddTop = mData.mData_global.first_top;
             } else {
@@ -282,7 +282,7 @@
         li.className = 'font_f imgItem';
         li.innerHTML = text;
         document.getElementById('mDrag_vvv_imglist').appendChild(li);
-        document.getElementById(li.id).addEventListener('click', function(evt) {
+        document.getElementById(li.id).addEventListener('click', function (evt) {
             $(this).parent().siblings('.mDrag_font_text').text($(this).text());
             var id = $(this).attr('id').replace(/name_/, '');
             $(".act_bg").removeClass('active');
@@ -291,7 +291,7 @@
     }
 
 
-    $("#backgroundFile").change(function(evt) {
+    $("#backgroundFile").change(function (evt) {
         var file = this.files[0];
         var reader = new FileReader();
         var div = document.createElement('div');
@@ -303,7 +303,7 @@
         div.id = createid();
         var img = new Image();
         var imgFile;
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             imgFile = e.target.result;
             img.src = imgFile;
             div.appendChild(img);
@@ -314,11 +314,11 @@
         reader.readAsDataURL(file);
     });
 
-    $("#mDrag_mmm_font,#mDrag_mmm_size").on('click', function(evt) {
+    $("#mDrag_mmm_font,#mDrag_mmm_size").on('click', function (evt) {
         $(this).children(".mDrag_fontdropdownlist").toggle('active');
     });
 
-    $(".DFL_item").on('click', function(evt) {
+    $(".DFL_item").on('click', function (evt) {
         var ft = $(this).css('font-family');
         if ($('.dymic').hasClass('active')) {
             $('.dymic.active').css({ 'font-family': ft });
@@ -327,7 +327,7 @@
         }
     })
 
-    $(".DFL_item_size").on('click', function(evt) {
+    $(".DFL_item_size").on('click', function (evt) {
         var ft = $(this).css('font-size');
         if ($('.dymic').hasClass('active')) {
             $('.dymic.active').css({ 'font-size': ft });
@@ -336,7 +336,7 @@
         }
     })
 
-    $('.mDrag_el_blod').on('click', function(evt) {
+    $('.mDrag_el_blod').on('click', function (evt) {
         if ($('.dymic').hasClass('active')) {
             if ($('.dymic.active').css('font-weight') === '400') {
                 $('.dymic.active').css({ 'font-weight': 'bold' });
@@ -350,7 +350,7 @@
         }
     })
 
-    $('.mDrag_el_italic').on('click', function(evt) {
+    $('.mDrag_el_italic').on('click', function (evt) {
         if ($('.dymic').hasClass('active')) {
             if ($('.dymic.active').css('font-style') === 'normal') {
                 $('.dymic.active').css({ 'font-style': 'italic' });
@@ -364,7 +364,7 @@
         }
     })
 
-    $('.mDrag_el_underline').on('click', function(evt) {
+    $('.mDrag_el_underline').on('click', function (evt) {
         if ($('.dymic').hasClass('active')) {
             if ($('.dymic.active').css('text-decoration') === 'none solid rgb(0, 0, 0)') {
                 $('.dymic.active').css({ 'text-decoration': 'underline' });
@@ -378,12 +378,12 @@
         }
     })
 
-    $('.act_bg').on('click', function(evt) {
+    $('.act_bg').on('click', function (evt) {
         $('.act_bg').removeClass('active');
         $(this).addClass('active');
     })
 
-    $('.mDrag_el_justify').on('click', function(evt) {
+    $('.mDrag_el_justify').on('click', function (evt) {
         var _this = this;
         if ($('.dymic').hasClass('active')) {
             var strsty = $(_this).attr('data-v');
@@ -418,7 +418,7 @@
         return document.getElementById(el);
     }
 
-    function getBase64Image(img,width,height) {
+    function getBase64Image(img, width, height) {
         var canvas = document.createElement("canvas");
         canvas.width = width ? width : img.width;
         canvas.height = height ? height : img.height;
@@ -430,7 +430,7 @@
 
     function imgloadcomplete(img) {
         var def = $.Deferred();
-        img.onload = function() {
+        img.onload = function () {
             var b64d = getBase64Image(img);
             def.resolve(b64d);
         }
@@ -440,7 +440,7 @@
     var checkboxs = document.getElementsByClassName('acp_cb');
     for (let index = 0; index < checkboxs.length; index++) {
         const e = checkboxs[index];
-        e.addEventListener('click', function() {
+        e.addEventListener('click', function () {
             var _this = this;
             if (this.classList.contains('checked')) {
                 this.classList.remove('checked');
