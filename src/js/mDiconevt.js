@@ -116,8 +116,8 @@
         $(this).parent().siblings('.mDrag_font_text').text($(this).text());
         if ($(this).hasClass('imgItem')) {
             var id = $(this).attr('id').replace(/name_/, '');
+            $(".act_bg").removeClass('active');
             document.getElementById(id).classList.add('active');
-            $("#" + id).css({ 'z-index': 999 });
         } else {
             mData.tmp.fontFamily = $(this).text();
         }
@@ -271,15 +271,14 @@
         var li = document.createElement('li');
         li.id = 'name_' + id;
         li.className = 'font_f imgItem';
-        li.dataImgid = id;
         li.innerHTML = text;
-        li.addEventListener('click', function(evt) {
+        document.getElementById('mDrag_vvv_imglist').appendChild(li);
+        document.getElementById(li.id).addEventListener('click', function(evt) {
             $(this).parent().siblings('.mDrag_font_text').text($(this).text());
             var id = $(this).attr('id').replace(/name_/, '');
+            $(".act_bg").removeClass('active');
             document.getElementById(id).classList.add('active');
-            $("#" + id).css({ 'z-index': 999 });
         })
-        document.getElementById('mDrag_vvv_imglist').appendChild(li);
     }
 
 
