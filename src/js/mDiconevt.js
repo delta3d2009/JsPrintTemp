@@ -37,8 +37,7 @@
             const item = mData.tmp.bgi[index];
             var img = new Image();
             img.src = item.url;
-            img.onload = function() {
-                var b64d = getBase64Image(img,80,80);
+            imgloadcomplete(img).done(function(b64d) {
                 var div = document.createElement('div');
                 if (index == 0) {
                     div.className = 'act_bg';
@@ -50,7 +49,8 @@
                 img1.src = b64d;
                 div.appendChild(img1);
                 document.getElementById('a_con_template').appendChild(div);
-            }
+                $(div).width(item.w);
+            })
         }
         mData.tmp.eles = JSON.parse(mData.tmp.eles);
         for (let index = 0; index < mData.tmp.eles.length; index++) {
@@ -423,7 +423,18 @@
         var ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         var dataURL = canvas.toDataURL();
+        console.log(img,dataURL);
+        
         return dataURL;
+    }
+
+    function imgloadcomplete(img) {
+        var def = $.Deferred();
+        img.onload = function() {
+            var b64d = getBase64Image(img);
+            def.resolve(b64d);
+        }
+        return def;
     }
 
     var checkboxs = document.getElementsByClassName('acp_cb');
