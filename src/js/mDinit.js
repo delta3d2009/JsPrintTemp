@@ -73,7 +73,7 @@ function createid() {
             fontSizeHtml += '<li class="font_t" style="font-size:' + item + 'px">' + item + '</li>';
             fontSizeHtml2 += '<li class="DFL_item_size" style="font-size:' + item + 'px;height: auto;">' + item + '</li>';
         }
-        a_sty_lF.innerHTML = `<label for="" style="margin-left:0;">模板名称：
+        a_sty_lF.innerHTML = `<label for="">模板名称：
             </label><input type="text" name="" id="mDrag_tmpn">
             <label for="">模板尺寸：宽</label>
             <input class="mDrag_tmph" type="text" name="" id="mDrag_tmpw" style="width:30px;"> ✖高
@@ -95,7 +95,7 @@ function createid() {
 
         var a_sty_2F = getEle('div');
         a_sty_2F.className = 'a_sty_2F';
-        a_sty_2F.innerHTML = '<label for="" style="margin-left:0;">横向间距(元素)：</label>' +
+        a_sty_2F.innerHTML = '<label for="">横向间距(元素)：</label>' +
             '<input type="text" name="" id="mDrag_spert_x"><label for="">纵向间距(元素)：</label><input type="text" name="" id="mDrag_spert_y">' +
             '<label for="">第一项的上边距(元素)：</label><input type="text" name="" id="mDrag_ft"><label for="">第一项的左边距(元素)：</label><input type="text" name="" id="mDrag_fl">' +
             '<label for="">最大宽度(元素)：</label><input type="text" name="" id="mDrag_max"><label for="">最小宽度(元素)：</label><input type="text" name="" id="mDrag_min">';
@@ -110,7 +110,7 @@ function createid() {
                 imgHtml += '<li id="name_' + item.id + '" class="font_f imgItem">' + item.name + '</li>';
             }
         }
-        a_sty_2F_bg.innerHTML = `<label for="" style="margin-left:0;">选择图片：</label><span class="mDrag_font" style="width:300px"><span id="mDrag_f_i" style="width:300px;height: 100%;" class="mDrag_font_text"></span><span class="mDrag_font_icon"></span>
+        a_sty_2F_bg.innerHTML = `<label for="">选择图片：</label><span class="mDrag_font" style="width:300px"><span id="mDrag_f_i" style="width:300px;height: 100%;" class="mDrag_font_text"></span><span class="mDrag_font_icon"></span>
         <ul id="mDrag_vvv_imglist" class="mDrag_font_droplist" style="display:none;">
         ` + imgHtml + `</ul></span><label for=""><button class="delBgimg">删除背景</button></label><label for="">横向边距(图片)：</label>
         <input type="text" name="" id="bg_mDrag_spert_x"><label for="">纵向边距(图片)：</label>

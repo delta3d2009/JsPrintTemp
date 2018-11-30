@@ -49,7 +49,7 @@
                 img1.src = b64d;
                 div.appendChild(img1);
                 document.getElementById('a_con_template').appendChild(div);
-                $(div).css({ width: item.w, top: item.t, left: item.l });
+                $(div).css({ width: item.w, top: item.t, left: item.l, 'z-index': item.level });
             })
         }
         mData.tmp.eles = JSON.parse(mData.tmp.eles);
@@ -127,6 +127,12 @@
             var id = $(this).attr('id').replace(/name_/, '');
             $(".act_bg").removeClass('active');
             document.getElementById(id).classList.add('active');
+            var obj = _.find(mData.imgs, { id: id });
+            document.getElementById('bg_mDrag_spert_x').value = obj.l;
+            document.getElementById('bg_mDrag_spert_y').value = obj.t;
+            document.getElementById('bg_mDrag_spert_h').value = obj.h;
+            document.getElementById('bg_mDrag_spert_w').value = obj.w;
+            document.getElementById('bg_mDrag_spert_l').value = obj.level;
         } else {
             mData.tmp.fontFamily = $(this).text();
         }
@@ -287,12 +293,22 @@
             var id = $(this).attr('id').replace(/name_/, '');
             $(".act_bg").removeClass('active');
             document.getElementById(id).classList.add('active');
+            var obj = _.find(mData.imgs, { id: id });
+            document.getElementById('bg_mDrag_spert_x').value = obj.l;
+            document.getElementById('bg_mDrag_spert_y').value = obj.t;
+            document.getElementById('bg_mDrag_spert_h').value = obj.h;
+            document.getElementById('bg_mDrag_spert_w').value = obj.w;
+            document.getElementById('bg_mDrag_spert_l').value = obj.level;
         })
     }
 
 
     $("#backgroundFile").change(function (evt) {
         var file = this.files[0];
+        if (file.size > 40960) {
+            layer.msg('上传图片最大为40kb');
+            return;
+        }
         var reader = new FileReader();
         var div = document.createElement('div');
         if (mData.imgs.length > 0) {

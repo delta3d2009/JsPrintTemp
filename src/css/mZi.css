@@ -28,6 +28,9 @@
     align-items: center;
     width: 100%;
     flex-wrap: wrap;
+    align-content: space-between;
+    height: 70px;
+    padding: 0;
 }
 
 .a_sty_2F,
