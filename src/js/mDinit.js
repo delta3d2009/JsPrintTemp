@@ -5,34 +5,6 @@ function createid() {
     function getEle(tag) {
         return doc.createElement(tag);
     }
-    const data = [{
-        id: 1,
-        title: '打印项目1',
-        data: {
-            filed1: 'aaa',
-            filed2: 'bbb',
-            filed3: 'ccc',
-            filed4: 'ddd',
-        },
-
-    }, {
-        id: 2,
-        title: '打印项目2',
-        data: {
-            filed5: 'eee',
-            filed6: 'fff',
-            filed7: 'ggg',
-            filed8: 'hhh',
-            filed9: 'eee',
-            filed10: 'fff',
-            filed11: 'ggg',
-            filed12: 'hhh',
-            filed13: 'eee',
-            filed14: 'fff',
-            filed15: 'ggg',
-            filed16: 'hhh',
-        },
-    }]
 
     function initDom(data) {
         var _this = this;
@@ -195,22 +167,21 @@ function createid() {
         for (let index = 0; index < data.length; index++) {
             const item = data[index];
             if (index === 0) {
-                htmlText += '<ul class="acp_datawrap"><li class="acp_itemwrap separator-title"><span>' + item.title + '</span><i class="sui-icon icon-double-angle-up"></i></li>';
+                htmlText += '<ul class="acp_datawrap ' + (item.id === -1 ? 'useritemadd' : '') + '"><li class="acp_itemwrap separator-title"><span>' + item.title + '</span><i class="sui-icon icon-double-angle-up"></i></li>';
             } else {
-                htmlText += '<ul class="acp_datawrap" style="height: 25px;"><li class="acp_itemwrap separator-title"><span>' + item.title + '</span><i class="sui-icon icon-double-angle-down"></i></li>';
+                htmlText += '<ul class="acp_datawrap ' + (item.id === -1 ? 'useritemadd' : '') + '" style="height: 25px;"><li class="acp_itemwrap separator-title"><span>' + item.title + '</span><i class="sui-icon icon-double-angle-down"></i></li>';
+            }
+            if (item.id === -1) {
+                htmlText += '<li class="acp_itemwrap" style="background: #ccc;"><button class="itemadd" style=" width: 60px;cursor: pointer;color: #fff;background: #2e9f96;border: none;border-radius: 12px;font-size: 12px;padding: 1px;margin-left: 10px;">添加</button><button class="itemdel" style=" width: 60px;cursor: pointer;color: #fff;background: #2e9f96;border: none;border-radius: 12px;font-size: 12px;padding: 1px;margin-left: 10px;">删除</button></li>'
             }
             _.forEach(item.data, function (m, n) {
                 htmlText += '<li class="acp_itemwrap"><label id="acp_' + n + '" class="acp_cb checkbox-pretty inline checkbox" data-filed="' + n + '" data-val="' + m + '"><span>' + m + '</span></label></li>'
             })
             htmlText += '</ul>';
         }
-        htmlText += '<ul class="acp_datawrap useritemadd" style="height: 25px;"><li class="acp_itemwrap separator-title"><span>自定义选项</span><i class="sui-icon icon-double-angle-down"></i></li>';
-        htmlText += '<li class="acp_itemwrap" style="background: #ccc;"><img class="itemadd" src="/img/print/add.png" style="display: block;width: 18px;cursor: pointer;"></li>'
-        htmlText += '</ul>';
         htmlText += '</div>';
         return htmlText;
     }
-
-    initDom(data);
+    initDom(mDataInit.data);
     $(".print-field-container").mCustomScrollbar();
 })(document)

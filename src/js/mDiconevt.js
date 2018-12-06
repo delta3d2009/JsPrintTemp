@@ -260,6 +260,17 @@
         }
     })
 
+    $('.itemdel').on('click', function (evt) {
+        var dela = $('.useritemadd .acp_cb.checked');
+        _.forEach(dela, function (o) {
+            $(o).parent().remove();
+            var filed = $(o).attr('data-filed');
+            var _obj = _.filter(mData.mdl, { filed: filed });
+            document.getElementById(_obj[0].id).remove();
+            mData.delDataByFiled(filed);
+        })
+    })
+
     $(".itemadd").on('click', function (evt) {
         layer.prompt({ title: '请输入选项内容', formType: 2 }, function (text, index) {
             layer.close(index);
