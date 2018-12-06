@@ -1,7 +1,7 @@
 function createid() {
     return 'm_' + (new Date()).getTime();
 }
-(function(doc) {
+(function (doc) {
     function getEle(tag) {
         return doc.createElement(tag);
     }
@@ -32,7 +32,6 @@ function createid() {
             filed15: 'ggg',
             filed16: 'hhh',
         },
-
     }]
 
     function initDom(data) {
@@ -195,16 +194,19 @@ function createid() {
             '</div><div class="print-field-container">';
         for (let index = 0; index < data.length; index++) {
             const item = data[index];
-            htmlText += '<ul class="acp_datawrap"><li class="acp_itemwrap separator-title"><span>' + item.title + '</span><i class="sui-icon icon-double-angle-up"></i></li>';
-            // for (let i = 0; i < item.data.length; i++) {
-            //     const sub = item.data[i];
-            //     htmlText += '<li class="acp_itemwrap"><label id="acp_' + sub.filed + '" class="acp_cb checkbox-pretty inline checkbox" data-filed="' + sub.filed + '" data-val="' + sub.value + '"><span>' + sub.value + '</span></label></li>'
-            // }
-            _.forEach(item.data, function(m, n) {
+            if (index === 0) {
+                htmlText += '<ul class="acp_datawrap"><li class="acp_itemwrap separator-title"><span>' + item.title + '</span><i class="sui-icon icon-double-angle-up"></i></li>';
+            } else {
+                htmlText += '<ul class="acp_datawrap" style="height: 25px;"><li class="acp_itemwrap separator-title"><span>' + item.title + '</span><i class="sui-icon icon-double-angle-down"></i></li>';
+            }
+            _.forEach(item.data, function (m, n) {
                 htmlText += '<li class="acp_itemwrap"><label id="acp_' + n + '" class="acp_cb checkbox-pretty inline checkbox" data-filed="' + n + '" data-val="' + m + '"><span>' + m + '</span></label></li>'
             })
             htmlText += '</ul>';
         }
+        htmlText += '<ul class="acp_datawrap useritemadd" style="height: 25px;"><li class="acp_itemwrap separator-title"><span>自定义选项</span><i class="sui-icon icon-double-angle-down"></i></li>';
+        htmlText += '<li class="acp_itemwrap" style="background: #ccc;"><img class="itemadd" src="/img/print/add.png" style="display: block;width: 18px;cursor: pointer;"></li>'
+        htmlText += '</ul>';
         htmlText += '</div>';
         return htmlText;
     }

@@ -37,7 +37,7 @@
         this.tag.id = par.id;
         this.childTag = getEle('div');
         this.childTag.className = 'dymic_txt';
-        this.childTag.innerHTML = '<span class="filed" id="va' + iid + '">' + this.val + '</span><span class="acf_icon"><img id="' + iid + '" src="../img/print/remove.png" alt=""></span>';
+        this.childTag.innerHTML = '<span class="filed" id="va' + iid + '">' + this.val + '</span><span class="acf_icon"><img id="' + iid + '" src="/img/print/remove.png" alt=""></span>';
         this.tag.append(this.childTag);
         this.container.append(this.tag);
         new mDrag({ id: par.id, data: par });

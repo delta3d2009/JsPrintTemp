@@ -260,6 +260,32 @@
         }
     })
 
+    $(".itemadd").on('click', function (evt) {
+        layer.prompt({ title: '请输入选项内容', formType: 2 }, function (text, index) {
+            layer.close(index);
+            var filed = 'acfiled' + createid();
+            var htmlText = '<li class="acp_itemwrap"><label id="acp_' + filed + '" class="acp_cb checkbox-pretty inline checkbox" data-filed="' + filed + '" data-val="' + text + '"><span>' + text + '</span></label></li>';
+            $('.useritemadd').append(htmlText);
+            var h = $('.useritemadd').children().length;
+            h = (h + 1) * 24;
+            $('.useritemadd').animate({
+                height: h + "px"
+            }, 200);
+            document.getElementById('acp_' + filed).addEventListener('click', function () {
+                var _this = this;
+                if (this.classList.contains('checked')) {
+                    this.classList.remove('checked');
+                    var _obj = _.filter(mData.mdl, { filed: _this.getAttribute('data-filed') });
+                    document.getElementById(_obj[0].id).remove();
+                    mData.delDataByFiled(_this.getAttribute('data-filed'));
+                } else {
+                    this.classList.add('checked');
+                    new addMPPI({ filed: _this.getAttribute('data-filed'), val: _this.getAttribute('data-val'), container: "a_con_template" });
+                }
+            })
+        });
+    })
+
     $('.saveBtn').on('click', function (evt) {
         mData.tmp.eles = mData.mdl;
     })
