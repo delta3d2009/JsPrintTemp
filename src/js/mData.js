@@ -1,6 +1,6 @@
-(function(global, factory) {
+(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory : global.mData = factory
-})(this, (function() {
+})(this, (function () {
     /**
      * 
      * 数据管理
@@ -17,7 +17,7 @@
             first_left: 10, //默认第一项的做边距
             interval_x: 10, //横向间距
             interval_y: 10, //纵向间距
-            ele_max_width: 300, //默认300像素
+            ele_max_width: 160, //默认300像素
             ele_min_width: 80, //默认200像素
         },
         /**
@@ -46,7 +46,7 @@
          * _preMax 上一列最大宽度
          * 
          */
-        mPar: function(_id, _filed, _val, _x, _y, _order, _differX, _differY, _fontSize, _fontColor, _fontFamily, _align, _bold, _italic, _underline, _width, _height, _col, _pos, _preMax) {
+        mPar: function (_id, _filed, _val, _x, _y, _order, _differX, _differY, _fontSize, _fontColor, _fontFamily, _align, _bold, _italic, _underline, _width, _height, _col, _pos, _preMax) {
             this.id = _id;
             this.filed = _filed;
             this.val = _val;
@@ -100,7 +100,7 @@
         /**
          * 背景图对象
          */
-        bgi: function(_id, _name, _t, _l, _w, _h, _url, _level) {
+        bgi: function (_id, _name, _t, _l, _w, _h, _url, _level) {
             this.id = _id;
             this.name = _name;
             this.t = _t;
@@ -118,75 +118,96 @@
          * 图片集合
          */
         imgs: [],
-        add: function(obj) {
+        add: function (obj) {
             this.imgs.push(obj);
         },
-        remove: function(id) {
+        remove: function (id) {
             var _this = this;
-            _this.imgs = _.filter(_this.imgs, function(o) {
+            _this.imgs = _.filter(_this.imgs, function (o) {
                 return o.id !== id;
             })
+            _this.reSort();
         },
-        update: function(data) {
+        update: function (data) {
             var _this = this;
             var obj = _.find(_this.imgs, { id: data.id });
             Object.assign(obj, data);
-            _this.imgs = _.filter(_this.imgs, function(o) {
+            _this.imgs = _.filter(_this.imgs, function (o) {
                 return o.id !== data.id;
             })
             _this.imgs.push(obj);
         },
         preMax: {},
-        addPre: function(data) {
+        addPre: function (data) {
             var _this = this;
             Object.assign(_this.preMax, data);
         },
-        delPre: function(key) {
+        delPre: function (key) {
             if (!this._preMax.hasOwnProperty(key)) {
                 return;
             }
             delete this._preMax[key]
         },
-        sumPre: function() {
+        sumPre: function () {
             var _this = this;
             var sum = 0;
-            _.forEach(_this.preMax, function(v, k) {
+            _.forEach(_this.preMax, function (v, k) {
                 sum += v;
             })
             return sum;
         },
-        addData: function(data) {
+        addData: function (data) {
             this.mdl.push(data);
         },
-        delData: function(id) {
+        delData: function (id) {
             var _this = this;
-            _this.mdl = _.filter(_this.mdl, function(o) {
+            _this.mdl = _.filter(_this.mdl, function (o) {
                 return o.id !== id;
             })
+            _this.reSort();
         },
-        delDataByFiled: function(filed) {
+        delDataByFiled: function (filed) {
             var _this = this;
-            _this.mdl = _.filter(_this.mdl, function(o) {
+            _this.mdl = _.filter(_this.mdl, function (o) {
                 return o.filed !== filed;
             })
+            _this.reSort();
         },
-        updData: function(data) {
+        updData: function (data) {
             var _this = this;
             var obj = _.find(_this.mdl, { id: data.id });
             Object.assign(obj, data);
-            _this.mdl = _.filter(_this.mdl, function(o) {
+            _this.mdl = _.filter(_this.mdl, function (o) {
                 return o.id !== data.id;
             })
             _this.mdl.push(obj);
         },
-        updDataAll: function(data) {
+        updDataAll: function (data) {
             var _this = this;
-            _.forEach(_this.mdl, function(o) {
+            _.forEach(_this.mdl, function (o) {
                 Object.assign(o, data);
             })
         },
-        delStr: function(str) {
+        delStr: function (str) {
             return parseInt(str.replace(/px/g, ""));
+        },
+        reSort: function () {
+            var _this = this;
+            _this.mdl = _.sortBy(_this.mdl, ['order']);
+            let curaddTop = 0;
+            let curaddLeft = 0;
+            _.forEach(_this.mdl, function (v, k) {
+                if (k == 0) {
+                    curaddTop = _this.mData_global.first_top;
+                } else {
+                    curaddTop += _this.mData_global.interval_y + parseInt(v.height);
+                }
+                if (v.col == 1) {
+                    curaddLeft = _this.mData_global.first_left;
+                }
+                _this.updData({ id: v.id, x: curaddLeft, y: curaddTop });
+                $("#" + v.id).css({ top: curaddTop, left: curaddLeft })
+            });
         }
     }
     if (mDataInit.editTmp.printId) {

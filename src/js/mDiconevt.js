@@ -218,6 +218,22 @@
         }
     });
 
+    document.getElementById('mDrag_max').addEventListener('keyup', function (evt) {
+        if (this.value) {
+            mData.mData_global.ele_max_width = parseInt(this.value);
+        } else {
+            mData.mData_global.ele_max_width = 200;
+        }
+    });
+
+    document.getElementById('mDrag_min').addEventListener('keyup', function (evt) {
+        if (this.value) {
+            mData.mData_global.ele_max_width = parseInt(this.value);
+        } else {
+            mData.mData_global.ele_min_width = 80;
+        }
+    });
+
     $(".mDrag_el_color").bigColorpicker(function (el, color) {
         if ($('.dymic').hasClass('active')) {
             var id = $('.dymic.active').attr('id');
@@ -302,21 +318,7 @@
     })
 
     $('.sortBtn').on('click', function (evt) {
-        mData.mdl = _.sortBy(mData.mdl, ['order']);
-        let curaddTop = 0;
-        let curaddLeft = 0;
-        _.forEach(mData.mdl, function (v, k) {
-            if (k == 0) {
-                curaddTop = mData.mData_global.first_top;
-            } else {
-                curaddTop += mData.mData_global.interval_y + parseInt(v.height);
-            }
-            if (v.col == 1) {
-                curaddLeft = mData.mData_global.first_left;
-            }
-            mData.updData({ id: v.id, x: curaddLeft, y: curaddTop });
-            $("#" + v.id).css({ top: curaddTop, left: curaddLeft })
-        });
+        mData.reSort();
     })
 
     function appendImgList(id, text) {

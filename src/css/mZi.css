@@ -283,6 +283,7 @@ div#mDrag_dymic_parm {
     border: 1px solid #000;
     width: fit-content;
     background-color: rgba(133, 127, 113, 0.5);
+    transition: all .5s;
 }
 
 .dymic.active {
@@ -292,6 +293,7 @@ div#mDrag_dymic_parm {
 .dymic_txt {
     position: relative;
     padding-right: 30px;
+    word-wrap: break-word;
 }
 
 .filed {
