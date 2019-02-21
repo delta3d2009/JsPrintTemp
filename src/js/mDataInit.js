@@ -57,10 +57,6 @@ var mDataInit = {
         id: -1,
         title: '自定义选项',
         data: {
-            cu1: 'aaa',
-            cu2: 'bbb',
-            cu3: 'ccc',
-            cu4: 'ddd',
         }
     }]
 }
