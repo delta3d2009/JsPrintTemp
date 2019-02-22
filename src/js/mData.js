@@ -156,6 +156,14 @@
             })
             return sum;
         },
+        curPre: function (col) {
+            var _this = this;
+            var sum = 0;
+            for (let index = 0; index < col; index++) {
+                sum += _this.preMax[index + 1];
+            }
+            return sum;
+        },
         addData: function (data) {
             this.mdl.push(data);
         },
@@ -193,21 +201,121 @@
         },
         reSort: function () {
             var _this = this;
-            _this.mdl = _.sortBy(_this.mdl, ['order']);
+            // _this.mdl = _.sortBy(_this.mdl, ['order']);
             let curaddTop = 0;
             let curaddLeft = 0;
+            _this.preMax = {};
+            _this.reCol({ container: document.getElementById('a_con_template') }, _this.mdl);
+            var curcol = 0;
             _.forEach(_this.mdl, function (v, k) {
-                if (k == 0) {
+                if ((v.col === curcol && k === 0) || (v.col !== curcol)) {
                     curaddTop = _this.mData_global.first_top;
+                    curcol = v.col;
                 } else {
                     curaddTop += _this.mData_global.interval_y + parseInt(v.height);
                 }
-                if (v.col == 1) {
+                if (v.col == 0) {
                     curaddLeft = _this.mData_global.first_left;
+                } else {
+                    curaddLeft = _this.mData_global.interval_x * v.col + _this.curPre(v.col) + _this.mData_global.first_left;
                 }
                 _this.updData({ id: v.id, x: curaddLeft, y: curaddTop });
                 $("#" + v.id).css({ top: curaddTop, left: curaddLeft })
             });
+        },
+        reCol: function (_that, data) {
+            var _this = this;
+            var contHeight = $(_that.container).height();
+            var sumEh = 0;
+            var cc = 0;
+            var tmp = [];
+            for (let index = 0; index < data.length; index++) {
+                const d = data[index];
+                if (index === 0) {
+                    sumEh += d.height;
+                } else {
+                    sumEh += d.height + _this.mData_global.interval_y;
+                }
+                if (sumEh + _this.mData_global.first_top >= contHeight) {
+                    sumEh = d.height;
+                    cc++;
+                    _this.colMax(tmp, cc);
+                    tmp = [];
+                }
+                _this.mdl[index].col = cc;
+                tmp.push(_this.mdl[index]);
+            }
+            return cc;
+        },
+        colMax: function (data, c) {
+            var _this = this;
+            var _data = _.sortBy(data, function (o) {
+                return o.width;
+            });
+            _this.preMax[c] = _data[_data.length - 1].width;
+        },
+        calThisTop: function (data, col) {
+            var curtop = 0;
+            data = _.filter(data, function (o) {
+                return o.col === col;
+            })
+            for (let index = 0; index < data.length - 1; index++) {
+                const item = data[index];
+                curtop += item.height;
+            }
+            return { t: curtop, c: data.length - 1 };
+        },
+        getCol: function (_that, data) {
+            var _this = this;
+            var contHeight = $(_that.container).height();
+            var sumEh = 0;
+            var cc = 1;
+            var lastObj = _this.mdl[_this.mdl.length - 1];
+            while (_this.hasObj(data, cc)) {
+                cc++;
+            }
+            data = _.filter(_this.mdl, function (o) {
+                return o.col === cc - 1;
+            })
+
+            for (let index = 0; index < data.length; index++) {
+                const d = data[index];
+                if (index === 0) {
+                    sumEh += d.height;
+                } else {
+                    sumEh += d.height + _this.mData_global.interval_y;
+                }
+            }
+            if (contHeight < sumEh + _this.mData_global.first_top + lastObj.width + _this.mData_global.interval_y)
+                return cc;
+            return cc - 1;
+        },
+        getMaxW: function (data, col, prop) {
+            var _this = this;
+            data = _.filter(data, function (o) {
+                return o.col === col;
+            });
+            var temp;
+            var flag;
+            for (let i = 0; i < data.length - 1; i++) {
+                flag = false;
+                for (let j = data.length - 1; j > i; j--) {
+                    if (data[j][prop] < data[j - 1][prop]) {
+                        temp = data[j];
+                        data[j] = data[j - 1];
+                        data[j - 1] = temp;
+                        flag = true;
+                    }
+                }
+                if (!flag) break;
+            }
+            _this.addPre({
+                [col]: data[data.length - 1].width
+            });
+            return data;
+        },
+        hasObj: function (data, col) {
+            return _.find(data, { col: col })
         }
     }
     if (mDataInit.editTmp.printId) {

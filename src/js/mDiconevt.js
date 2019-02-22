@@ -36,6 +36,7 @@
         for (let index = 0; index < mData.tmp.bgi.length; index++) {
             const item = mData.tmp.bgi[index];
             var img = new Image();
+            img.setAttribute('crossOrigin', 'Anonymous');
             img.src = item.url;
             imgloadcomplete(img).done(function (b64d) {
                 var div = document.createElement('div');

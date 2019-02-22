@@ -7,23 +7,7 @@
  * 
  */
 var mDataInit = {
-    editTmp: {
-        "printId": 6,
-        "isDel": "901002",
-        "bgi": "[]",
-        "eles": "[]",
-        "name": "新的打印模板",
-        "height": 350,
-        "width": 350,
-        "fontSize": 12,
-        "fontFamily": "微软雅黑",
-        "fontColor": "#000",
-        "dx": 0,
-        "dy": 0,
-        "img": "/img/20181126150947.png",
-        "printSize": "350*350",
-        "gmtCreate": "Nov 26, 2018 3:09:57 PM"
-    },
+    editTmp: { "printId": 27, "isDel": "901002", "bgi": "[{\"id\":\"m_1543819030923\",\"w\":320,\"h\":420,\"l\":0,\"t\":1,\"url\":\"/http://easystop.com.cn:8080/img/print/add.png\",\"level\":0,\"name\":\"a7.jpg\",\"data\":\"\"},{\"id\":\"m_1543819036661\",\"w\":100,\"h\":420,\"l\":0,\"t\":220,\"url\":\"/img/qr_code.png\",\"level\":1,\"name\":\"qr_code.png\",\"data\":\"\"}]", "eles": "[{\"col\":1,\"differX\":0,\"differY\":0,\"filed\":\"customerTime\",\"height\":26,\"id\":\"m_1543819038067\",\"order\":0,\"val\":\"消费时间\",\"width\":90,\"x\":10,\"y\":10,\"pos\":{\"col\":1,\"row\":1}},{\"col\":1,\"differX\":0,\"differY\":0,\"filed\":\"qrCodePath\",\"height\":26,\"id\":\"m_1543819038386\",\"order\":1,\"val\":\"入园二维码\",\"width\":100,\"x\":10,\"y\":46,\"pos\":{\"col\":1,\"row\":2}},{\"col\":1,\"differX\":0,\"differY\":0,\"filed\":\"productPayPrice\",\"height\":26,\"id\":\"m_1543819038706\",\"order\":2,\"val\":\"产品价格\",\"width\":90,\"x\":10,\"y\":82,\"pos\":{\"col\":1,\"row\":3}}]", "name": "1121", "height": 320, "width": 320, "fontSize": 12, "fontFamily": "微软雅黑", "fontColor": "#000", "dx": 0, "dy": 0, "img": "", "printSize": "320*320", "gmtCreate": "Dec 3, 2018 2:39:11 PM" },
     fontFamilyList: ['宋体', '黑体', '楷体', '新宋体', '微软雅黑'],
     fontSizeList: [12, 14, 16, 18, 20, 24, 28, 32],
     data: [{
